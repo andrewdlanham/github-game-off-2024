@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp4r2adpi14kc"]
+
+[ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="1_ypvbf"]
+
+[node name="Letter" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="LetterText" type="Label" parent="."]
+z_index = 1
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 7.0
+offset_bottom = 9.0
+theme_override_colors/font_color = Color(0, 0.695794, 0.86808, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_ypvbf")
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
