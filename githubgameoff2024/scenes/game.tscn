@@ -116,11 +116,19 @@ text = "_  _  _  _  _"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spawn Point" parent="." instance=ExtResource("10_fi7dd")]
-position = Vector2(71, -42)
-
 [node name="Letter Item" parent="." instance=ExtResource("9_txl2s")]
 position = Vector2(-55, -45)
 
 [node name="Letter Item2" parent="." instance=ExtResource("9_txl2s")]
 position = Vector2(105, -62)
+
+[node name="Spawn Points" type="Node" parent="."]
+
+[node name="Spawn Point2" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-149, -120)
+
+[node name="Spawn Point3" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-103, -146)
+
+[node name="Spawn Point" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(71, -42)

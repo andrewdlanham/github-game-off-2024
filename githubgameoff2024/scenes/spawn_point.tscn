@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://u2h3lpqfs8vi" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/spawn-point.png" id="1_8oowy"]
 
-[node name="Spawn Point" type="Area2D"]
+[node name="Spawn Point" type="Area2D" groups=["Spawn Points"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8oowy")
