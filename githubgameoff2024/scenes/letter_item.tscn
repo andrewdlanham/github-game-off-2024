@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://bp4r2adpi14kc"]
+[gd_scene load_steps=4 format=3 uid="uid://du1jd3da6icf3"]
 
-[ext_resource type="Script" path="res://scenes/letter_pickup.gd" id="1_0dexq"]
-[ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="1_thr0v"]
+[ext_resource type="Script" path="res://scripts/letter_item.gd" id="1_5h443"]
+[ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="2_libma"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkoho"]
 size = Vector2(19, 18)
 
-[node name="LetterPickup" type="Area2D"]
+[node name="Letter Item" type="Area2D"]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_0dexq")
+script = ExtResource("1_5h443")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_rkoho")
 
-[node name="Text" type="Label" parent="."]
+[node name="LetterLabel" type="Label" parent="."]
 z_index = 1
 offset_left = -18.0
 offset_top = -22.0
@@ -23,8 +23,8 @@ offset_bottom = 2.0
 scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("1_thr0v")
-text = "?"
+theme_override_fonts/font = ExtResource("2_libma")
+text = "A"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
