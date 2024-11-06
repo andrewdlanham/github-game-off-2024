@@ -1,8 +1,10 @@
 extends Node2D
 
 @onready var random_word_generator: Node2D = %RandomWordGenerator
+@onready var secret_word_label: Label = %SecretWordLabel
 
 var random_word
+var revealed_word = ""
 
 var spawn_points = []
 
@@ -13,6 +15,10 @@ func _ready() -> void:
 	# Get random word for this round
 	random_word = random_word_generator.get_random_word()
 	print("random word: " + random_word)
+	
+	# Populate revelead word with dashes
+	for n in range (random_word.length()): revealed_word += "-"
+	secret_word_label.text = revealed_word
 	
 	# Get all possible spawn points in the level
 	var available_spawn_points
@@ -29,6 +35,8 @@ func _ready() -> void:
 	var letter_item = preload("res://scenes/letter_item.tscn")
 	for n in range(random_word.length()):
 		var letter_item_instance = letter_item.instantiate()
+		letter_item_instance.secret_word_label = secret_word_label
+		letter_item_instance.letterPosition = n
 		letter_item_instance.hiddenLetter = random_word[n]
 		letter_item_instance.position = spawn_points[n].position
 		# TODO: Add these to the right spot in the tree

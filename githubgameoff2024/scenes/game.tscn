@@ -100,18 +100,16 @@ tile_set = SubResource("TileSet_qoudr")
 [node name="Background" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_w3dx3")
 
-[node name="SecretWord" type="Node2D" parent="."]
-
-[node name="TempText" type="Label" parent="SecretWord"]
-offset_left = -30.0
-offset_top = -193.0
-offset_right = 29.0
+[node name="SecretWordLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -95.0
+offset_top = -216.0
+offset_right = 96.0
 offset_bottom = -170.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("4_tdhqy")
-theme_override_font_sizes/font_size = 8
-text = "_  _  _  _  _"
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 vertical_alignment = 1
 

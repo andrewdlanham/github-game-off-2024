@@ -3,6 +3,10 @@ extends Node2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var letter_label: Label = $LetterLabel
 
+@onready var secret_word_label
+
+
+
 var letterPosition # Letter's position in secret word
 var hiddenLetter = ''
 
@@ -19,7 +23,6 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	print("Letter picked up: " + hiddenLetter)
-	
-	# TODO: Add letter to hidden word
+	secret_word_label.text[letterPosition] = hiddenLetter
 	
 	queue_free()

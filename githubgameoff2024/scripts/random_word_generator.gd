@@ -5,4 +5,4 @@ func get_random_word():
 	
 	# TODO: Implement random words
 	
-	return "gamer" # Temporary word
+	return "CHIP" # Temporary word
