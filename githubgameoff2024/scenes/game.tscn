@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://drjjghxylfqgw"]
+[gd_scene load_steps=16 format=4 uid="uid://drjjghxylfqgw"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_ken4y"]
 [ext_resource type="PackedScene" uid="uid://nv0xdio8knoa" path="res://scenes/player.tscn" id="1_nkibr"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cnknjqytguolj" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Yellow_&_Grey.png" id="4_8xxp3"]
 [ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="4_tdhqy"]
 [ext_resource type="Texture2D" uid="uid://beynguo5ppsqy" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Castle.png" id="5_r3sru"]
-[ext_resource type="PackedScene" uid="uid://du1jd3da6icf3" path="res://scenes/letter_item.tscn" id="9_txl2s"]
 [ext_resource type="PackedScene" uid="uid://drrwj3l0gga7" path="res://scenes/spawn_point.tscn" id="10_fi7dd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldrlm"]
@@ -116,19 +115,25 @@ text = "_  _  _  _  _"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Letter Item" parent="." instance=ExtResource("9_txl2s")]
-position = Vector2(-55, -45)
-
-[node name="Letter Item2" parent="." instance=ExtResource("9_txl2s")]
-position = Vector2(105, -62)
-
 [node name="Spawn Points" type="Node" parent="."]
 
 [node name="Spawn Point2" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
-position = Vector2(-149, -120)
+position = Vector2(-175, -12)
 
 [node name="Spawn Point3" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
-position = Vector2(-103, -146)
+position = Vector2(179, -12)
 
 [node name="Spawn Point" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
 position = Vector2(71, -42)
+
+[node name="Spawn Point4" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(103, -61)
+
+[node name="Spawn Point5" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-55, -45)
+
+[node name="Spawn Point6" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-97, -10)
+
+[node name="Spawn Point7" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-130, -10)
