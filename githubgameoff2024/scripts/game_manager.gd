@@ -3,6 +3,9 @@ extends Node2D
 @onready var random_word_generator: Node2D = %RandomWordGenerator
 @onready var secret_word_label: Label = %SecretWordLabel
 
+@onready var player: CharacterBody2D = %Player
+
+
 var random_word
 var revealed_word = ""
 
@@ -10,10 +13,8 @@ var spawn_points = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("_ready()")
 	
-	# Get random word for this round
-	random_word = random_word_generator.get_random_word()
+	random_word = random_word_generator.get_random_word()	# Get random word for this round
 	print("random word: " + random_word)
 	
 	# Populate revelead word with dashes
@@ -39,12 +40,21 @@ func _ready() -> void:
 		letter_item_instance.letterPosition = n
 		letter_item_instance.hiddenLetter = random_word[n]
 		letter_item_instance.position = spawn_points[n].position
-		# TODO: Add these to the right spot in the tree
-		add_child(letter_item_instance)
+		add_child(letter_item_instance) # TODO: Add these to the right spot in the tree
 	
 	
 	# TODO: Start timer when player gets control
+	
+	
+	
+	
+	player.is_enabled = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+	
+func check_for_correct_guess(guess):
+	print("Checking if guess is correct...")
+	if guess.to_upper() == random_word:
+		print("Correct guess!")

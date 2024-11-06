@@ -6,8 +6,11 @@ const JUMP_VELOCITY = -300.0
 
 @onready var player_sprite: Sprite2D = $Sprite2D
 
+var is_enabled: bool
 
 func _physics_process(delta: float) -> void:
+	
+	if not is_enabled: return
 	
 	# Handle gravity
 	if not is_on_floor():
