@@ -133,6 +133,9 @@ position = Vector2(71, -42)
 [node name="Spawn Point4" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
 position = Vector2(103, -61)
 
+[node name="Spawn Point8" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(137, -28)
+
 [node name="Spawn Point5" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
 position = Vector2(-55, -45)
 

@@ -15,13 +15,7 @@ func _ready() -> void:
 	print("Letter ready.")
 	letter_label.text = '?'
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	print("Letter picked up: " + hiddenLetter)
 	secret_word_label.text[letterPosition] = hiddenLetter
 	
