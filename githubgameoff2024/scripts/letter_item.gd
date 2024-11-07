@@ -12,11 +12,11 @@ var hiddenLetter = ''
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("Letter ready.")
+	#print("Letter ready.")
 	letter_label.text = '?'
 
 func _on_body_entered(_body: Node2D) -> void:
-	print("Letter picked up: " + hiddenLetter)
+	#print("Letter picked up: " + hiddenLetter)
 	secret_word_label.text[letterPosition] = hiddenLetter
 	
 	queue_free()

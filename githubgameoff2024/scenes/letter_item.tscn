@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="2_libma"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkoho"]
-size = Vector2(19, 18)
+size = Vector2(12, 16)
 
 [node name="Letter Item" type="Area2D"]
 scale = Vector2(0.5, 0.5)
