@@ -136,7 +136,7 @@ offset_bottom = -104.0
 [node name="Spawn Points" type="Node" parent="."]
 
 [node name="Spawn Point2" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
-position = Vector2(-249, -9)
+position = Vector2(-221, -18)
 
 [node name="Spawn Point3" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
 position = Vector2(215, -27)

@@ -22,6 +22,7 @@ func _ready() -> void:
 	secret_word_label.text = revealed_word
 	
 	# Get all possible spawn points in the level
+	
 	var available_spawn_points
 	available_spawn_points = get_tree().get_nodes_in_group("Spawn Points")
 	print("Available spawn points: " + str(available_spawn_points.size()))
@@ -33,7 +34,13 @@ func _ready() -> void:
 		available_spawn_points.erase(random_spawn_point)
 	
 	# Spawn letters to be collected at selected spawn points
-	var letter_item = preload("res://scenes/letter_item.tscn")
+	var letter_item = load("res://scenes/letter_item.tscn")
+	
+	if not letter_item:
+		print("ERROR: letter_item didn't load properly")
+	
+	print("#spawn points: " + str(spawn_points.size()))
+	
 	for n in range(random_word.length()):
 		var letter_item_instance = letter_item.instantiate()
 		letter_item_instance.secret_word_label = secret_word_label
@@ -45,10 +52,7 @@ func _ready() -> void:
 	
 	# TODO: Start timer when player gets control
 	
-	
-	
-	
-	player.is_enabled = true
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -5,8 +5,6 @@ extends Node2D
 
 @onready var secret_word_label
 
-
-
 var letterPosition # Letter's position in secret word
 var hiddenLetter = ''
 

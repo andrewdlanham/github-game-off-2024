@@ -8,6 +8,9 @@ const JUMP_VELOCITY = -300.0
 
 var is_enabled: bool
 
+func _ready() -> void:
+	is_enabled = true
+
 func _physics_process(delta: float) -> void:
 	
 	if not is_enabled: return

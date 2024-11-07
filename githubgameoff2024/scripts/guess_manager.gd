@@ -8,8 +8,8 @@ var guessing_mode_enabled: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	guessing_mode_enabled = false
 	
+	guessing_mode_enabled = false
 	guess_input_box.visible = false 	# Hide guess input box
 
 
