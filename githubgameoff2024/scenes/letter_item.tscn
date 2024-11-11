@@ -4,22 +4,23 @@
 [ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="2_libma"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkoho"]
-size = Vector2(12, 16)
+size = Vector2(7, 11.5)
 
 [node name="Letter Item" type="Area2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_5h443")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
 scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_rkoho")
 
 [node name="LetterLabel" type="Label" parent="."]
 z_index = 1
 offset_left = -18.0
-offset_top = -22.0
+offset_top = -28.0
 offset_right = 1.0
-offset_bottom = 2.0
+offset_bottom = -4.0
 scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 4

@@ -1,0 +1,181 @@
+[gd_scene load_steps=18 format=4 uid="uid://drjjghxylfqgw"]
+
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_ken4y"]
+[ext_resource type="PackedScene" uid="uid://nv0xdio8knoa" path="res://scenes/player.tscn" id="1_nkibr"]
+[ext_resource type="Texture2D" uid="uid://cd2gk1mxni4xr" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Peach_&_Brown.png" id="1_xr5ew"]
+[ext_resource type="Texture2D" uid="uid://cm0plk8wba4xj" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Red_&_Pink.png" id="2_d5b4p"]
+[ext_resource type="Script" path="res://scripts/random_word_generator.gd" id="2_vdels"]
+[ext_resource type="Script" path="res://scripts/guess_manager.gd" id="3_wb8e3"]
+[ext_resource type="Texture2D" uid="uid://cnknjqytguolj" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Yellow_&_Grey.png" id="4_8xxp3"]
+[ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="4_tdhqy"]
+[ext_resource type="Script" path="res://scripts/timer_manager.gd" id="4_xca8h"]
+[ext_resource type="Texture2D" uid="uid://beynguo5ppsqy" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Castle.png" id="5_r3sru"]
+[ext_resource type="PackedScene" uid="uid://drrwj3l0gga7" path="res://scenes/spawn_point.tscn" id="10_fi7dd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldrlm"]
+texture = ExtResource("1_xr5ew")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ofw31"]
+texture = ExtResource("2_d5b4p")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_qoudr"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_ldrlm")
+sources/1 = SubResource("TileSetAtlasSource_ofw31")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r7pmw"]
+texture = ExtResource("4_8xxp3")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ton8h"]
+texture = ExtResource("5_r3sru")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_w3dx3"]
+sources/0 = SubResource("TileSetAtlasSource_r7pmw")
+sources/1 = SubResource("TileSetAtlasSource_ton8h")
+
+[node name="Game" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_ken4y")
+
+[node name="RandomWordGenerator" type="Node2D" parent="GameManager"]
+unique_name_in_owner = true
+script = ExtResource("2_vdels")
+
+[node name="GuessManager" type="Node" parent="."]
+script = ExtResource("3_wb8e3")
+
+[node name="TimerManager" type="Node" parent="."]
+script = ExtResource("4_xca8h")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -146)
+zoom = Vector2(2, 2)
+
+[node name="Player" parent="." instance=ExtResource("1_nkibr")]
+unique_name_in_owner = true
+position = Vector2(0, -189)
+scale = Vector2(2, 2)
+
+[node name="TimerLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -49.0
+offset_top = -268.0
+offset_right = 3.0
+offset_bottom = -250.0
+scale = Vector2(2, 0.966)
+theme_override_fonts/font = ExtResource("4_tdhqy")
+text = "0.00"
+
+[node name="SecretWordLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -95.0
+offset_top = -216.0
+offset_right = 96.0
+offset_bottom = -170.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_tdhqy")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GuessInputBox" type="LineEdit" parent="."]
+unique_name_in_owner = true
+offset_left = -79.0
+offset_top = -135.0
+offset_right = 79.0
+offset_bottom = -104.0
+
+[node name="Spawn Points" type="Node" parent="."]
+
+[node name="Spawn Point2" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-152, -24)
+
+[node name="Spawn Point3" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(216, -24)
+
+[node name="Spawn Point" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(248, -56)
+
+[node name="Spawn Point4" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(216, -104)
+
+[node name="Spawn Point9" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(104, -56)
+
+[node name="Spawn Point10" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(72, -40)
+
+[node name="Spawn Point11" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-104, -56)
+
+[node name="Spawn Point12" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-168, -88)
+
+[node name="Spawn Point8" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(136, -24)
+
+[node name="Spawn Point5" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-248, -88)
+
+[node name="Spawn Point6" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-72, -56)
+
+[node name="Spawn Point7" parent="Spawn Points" instance=ExtResource("10_fi7dd")]
+position = Vector2(-248, -40)
+
+[node name="Tiles" type="Node" parent="."]
+
+[node name="Ground" type="TileMapLayer" parent="Tiles"]
+tile_map_data = PackedByteArray("AAD//wAAAQACAAIAAAD+/wAAAQACAAIAAAD9/wAAAQACAAIAAAD8/wAAAQACAAIAAAAAAAAAAQACAAIAAAABAAAAAQACAAIAAAACAAAAAQACAAIAAAADAAAAAQACAAIAAAAEAAAAAQACAAIAAAAFAAAAAQACAAIAAAAGAAAAAQACAAIAAAAHAAAAAQACAAIAAAD7/wAAAQACAAIAAAD6/wAAAQACAAIAAAD5/wAAAQACAAIAAAD4/wAAAQACAAIAAAD3/wAAAQACAAIAAAAIAAAAAQACAAIAAAD2/wAAAQACAAIAAAD1/wAAAQACAAIAAAD0/wAAAQACAAIAAADz/wAAAQACAAIAAAAJAAAAAQACAAIAAAAKAAAAAQACAAIAAAALAAAAAQACAAIAAAAMAAAAAQACAAIAAAANAAAAAQACAAIAAAAOAAAAAQACAAIAAAAPAAAAAQACAAIAAADx/wAAAQACAAIAAADy/wAAAQACAAIAAAAEAP7/AQACAAIAAAAGAP3/AQACAAIAAAAIAP//AQACAAIAAADv/wAAAQACAAIAAADw/wAAAQACAAIAAADu/wAAAQACAAIAAAARAAAAAQACAAIAAAAQAAAAAQACAAIAAADu////AQACAAIAAADu/+3/AQACAAIAAADu/+7/AQACAAIAAADu/+//AQACAAIAAADu//D/AQACAAIAAADu//H/AQACAAIAAADu//L/AQACAAIAAADu//P/AQACAAIAAADu//T/AQACAAIAAADu//X/AQACAAIAAADu//b/AQACAAIAAADu//f/AQACAAIAAADu//j/AQACAAIAAADu//n/AQACAAIAAADu//r/AQACAAIAAADu//v/AQACAAIAAADu//z/AQACAAIAAADu//3/AQACAAIAAADu//7/AQACAAIAAADv/+3/AQACAAIAAADw/+3/AQACAAIAAADx/+3/AQACAAIAAADy/+3/AQACAAIAAADz/+3/AQACAAIAAAD0/+3/AQACAAIAAAD1/+3/AQACAAIAAAD2/+3/AQACAAIAAAD3/+3/AQACAAIAAAD4/+3/AQACAAIAAAD5/+3/AQACAAIAAAD6/+3/AQACAAIAAAD7/+3/AQACAAIAAAD8/+3/AQACAAIAAAD9/+3/AQACAAIAAAD+/+3/AQACAAIAAAD//+3/AQACAAIAAAAAAO3/AQACAAIAAAABAO3/AQACAAIAAAACAO3/AQACAAIAAAADAO3/AQACAAIAAAAEAO3/AQACAAIAAAAFAO3/AQACAAIAAAAGAO3/AQACAAIAAAAHAO3/AQACAAIAAAAIAO3/AQACAAIAAAAJAO3/AQACAAIAAAAKAO3/AQACAAIAAAALAO3/AQACAAIAAAAMAO3/AQACAAIAAAANAO3/AQACAAIAAAAOAO3/AQACAAIAAAAPAO3/AQACAAIAAAAQAO3/AQACAAIAAAARAO3/AQACAAIAAAARAO7/AQACAAIAAAARAO//AQACAAIAAAARAPD/AQACAAIAAAARAPH/AQACAAIAAAARAPL/AQACAAIAAAARAPP/AQACAAIAAAARAPT/AQACAAIAAAARAPX/AQACAAIAAAARAPb/AQACAAIAAAARAPf/AQACAAIAAAARAPj/AQACAAIAAAARAPn/AQACAAIAAAARAPr/AQACAAIAAAARAPv/AQACAAIAAAARAPz/AQACAAIAAAARAP3/AQACAAIAAAARAP7/AQACAAIAAAARAP//AQACAAIAAADu/+z/AQACAAIAAADv/+z/AQACAAIAAADw/+z/AQACAAIAAADx/+z/AQACAAIAAADy/+z/AQACAAIAAADz/+z/AQACAAIAAAD0/+z/AQACAAIAAAD1/+z/AQACAAIAAAD2/+z/AQACAAIAAAD3/+z/AQACAAIAAAD4/+z/AQACAAIAAAD5/+z/AQACAAIAAAD6/+z/AQACAAIAAAD7/+z/AQACAAIAAAD8/+z/AQACAAIAAAD9/+z/AQACAAIAAAD+/+z/AQACAAIAAAD//+z/AQACAAIAAAAAAOz/AQACAAIAAAABAOz/AQACAAIAAAACAOz/AQACAAIAAAADAOz/AQACAAIAAAAEAOz/AQACAAIAAAAFAOz/AQACAAIAAAAGAOz/AQACAAIAAAAHAOz/AQACAAIAAAAIAOz/AQACAAIAAAAJAOz/AQACAAIAAAAKAOz/AQACAAIAAAALAOz/AQACAAIAAAAMAOz/AQACAAIAAAANAOz/AQACAAIAAAAOAOz/AQACAAIAAAAPAOz/AQACAAIAAAAQAOz/AQACAAIAAAARAOz/AQACAAIAAADv/+7/AQACAAIAAADv/+//AQACAAIAAADv//D/AQACAAIAAADv//H/AQACAAIAAADv//L/AQACAAIAAADv//P/AQACAAIAAADv//T/AQACAAIAAADv//X/AQACAAIAAADv//b/AQACAAIAAADv//f/AQACAAIAAADv//j/AQACAAIAAADv//n/AQACAAIAAADv//r/AQACAAIAAADv//v/AQACAAIAAADv//z/AQACAAIAAADv//3/AQACAAIAAADv//7/AQACAAIAAADv////AQACAAIAAAAQAO7/AQACAAIAAAAQAO//AQACAAIAAAAQAPD/AQACAAIAAAAQAPH/AQACAAIAAAAQAPL/AQACAAIAAAAQAPP/AQACAAIAAAAQAPT/AQACAAIAAAAQAPX/AQACAAIAAAAQAPb/AQACAAIAAAAQAPf/AQACAAIAAAAQAPj/AQACAAIAAAAQAPn/AQACAAIAAAAQAPr/AQACAAIAAAAQAPv/AQACAAIAAAAQAPz/AQACAAIAAAAQAP3/AQACAAIAAAAQAP7/AQACAAIAAAAQAP//AQACAAIAAADw//7/AQACAAIAAADw//v/AQACAAIAAADz//v/AQACAAIAAAD0//v/AQACAAIAAAD1//v/AQACAAIAAAD2//v/AQACAAIAAAD3//v/AQACAAIAAAD5//3/AQACAAIAAAD7//3/AQACAAIAAAD2////AQACAAIAAAANAP//AQACAAIAAAAPAP3/AQACAAIAAAANAPr/AQACAAIAAAA=")
+tile_set = SubResource("TileSet_qoudr")
+
+[node name="Background" type="TileMapLayer" parent="Tiles"]
+tile_set = SubResource("TileSet_w3dx3")
