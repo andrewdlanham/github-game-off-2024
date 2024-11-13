@@ -63,3 +63,6 @@ offset_left = -79.0
 offset_top = -135.0
 offset_right = 79.0
 offset_bottom = -104.0
+
+[node name="Letters" type="Node" parent="."]
+unique_name_in_owner = true
