@@ -34,13 +34,26 @@ unique_name_in_owner = true
 position = Vector2(0, -32)
 scale = Vector2(2, 2)
 
+[node name="CountdownTimer" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 10
+offset_left = -24.0
+offset_top = -200.0
+offset_right = 28.0
+offset_bottom = -149.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_tdhqy")
+theme_override_font_sizes/font_size = 50
+text = "3"
+horizontal_alignment = 1
+
 [node name="TimerLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = -49.0
-offset_top = -268.0
-offset_right = 3.0
-offset_bottom = -250.0
-scale = Vector2(2, 0.966)
+offset_left = -24.0
+offset_top = -272.0
+offset_right = 28.0
+offset_bottom = -254.0
 theme_override_fonts/font = ExtResource("4_tdhqy")
 text = "0.00"
 

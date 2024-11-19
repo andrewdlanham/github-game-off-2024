@@ -4,11 +4,16 @@ extends Node2D
 @onready var timer_manager: Node = %TimerManager
 @onready var secret_word_label: Label = %SecretWordLabel
 @onready var player: CharacterBody2D = %Player
+@onready var countdown_timer: Label = %CountdownTimer
+
 
 var secret_word
 var spawn_points
 var available_spawn_points
 var level_paths = ["res://levels/level_1.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
 					"res://levels/level_2.tscn"
 					]
 
@@ -19,9 +24,12 @@ var current_level_instance
 var is_level_complete: bool
 
 var letter_item
+var letters
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	letters = %Letters
 	
 	level_set_idx = -1
 	
@@ -33,7 +41,6 @@ func _ready() -> void:
 	
 	load_next_level()
 	setup_level()
-	timer_manager.unpause_timer()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -41,12 +48,7 @@ func _process(_delta: float) -> void:
 	# Check if player has revealed the secret word
 	if secret_word_label.text == secret_word && !is_level_complete:
 		print("LEVEL COMPLETE")
-		is_level_complete = true
-		timer_manager.pause_timer()
-		secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
-		await get_tree().create_timer(3.0).timeout
-		load_next_level()
-		setup_level()
+		handle_level_transition()
 		
 func check_for_correct_guess(guess):
 	print("Checking if guess is correct...")
@@ -56,24 +58,28 @@ func check_for_correct_guess(guess):
 		
 
 func load_next_level():
-	print("Loading next level...")
 	
 	if current_level_instance:
+		print("Deleting current level...")
 		current_level_instance.queue_free()
 	
 	level_set_idx += 1
 	
+	print("Loading next level...")
 	current_level = load(level_set[level_set_idx])
 	current_level_instance = current_level.instantiate()
 	add_child(current_level_instance) # TODO: Add to correct place in scene
 	
 func setup_level():
 	
-	var letters = %Letters
+	print("setup_level()")
+	
+	
 	
 	# Despawn letter items
 	for child in letters.get_children():
 		child.queue_free()
+		print("Letter despawned!")
 	
 	# Get secret word
 	secret_word = random_word_generator.get_random_word()
@@ -82,9 +88,6 @@ func setup_level():
 	# Set up word label
 	secret_word_label.text = ""
 	for n in range (secret_word.length()): secret_word_label.text += "-"
-	
-	# Set is_level_complete here
-	is_level_complete = false
 	
 	# Select letter item spawn points
 	available_spawn_points = []
@@ -106,3 +109,31 @@ func setup_level():
 		letter_item_instance.hiddenLetter = secret_word[n]
 		letter_item_instance.position = spawn_points[n].position
 		letters.add_child(letter_item_instance)
+	
+func handle_level_transition():
+	secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
+	is_level_complete = true
+	player.disable_movement()
+	
+	timer_manager.pause_timer()
+	
+	await get_tree().create_timer(2.0).timeout
+	load_next_level()
+	await get_tree().create_timer(1.0).timeout
+	setup_level()
+	secret_word_label.add_theme_color_override("font_color", Color(1, 1, 1))
+	
+	# Countdown timer
+	countdown_timer.text = '3'
+	countdown_timer.visible = true
+	await get_tree().create_timer(1.0).timeout
+	countdown_timer.text = '2'
+	await get_tree().create_timer(1.0).timeout
+	countdown_timer.text = '1'
+	await get_tree().create_timer(1.0).timeout
+	countdown_timer.visible = false
+	#
+	
+	timer_manager.unpause_timer()
+	is_level_complete = false
+	player.enable_movement()

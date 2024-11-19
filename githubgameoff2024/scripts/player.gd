@@ -38,3 +38,11 @@ func _physics_process(delta: float) -> void:
 
 	# TODO: Check what this function does
 	move_and_slide()
+
+func disable_movement():
+	print("Disabling movement...")
+	set_physics_process(false)
+	
+func enable_movement():
+	print("Enabling movement...")
+	set_physics_process(true)
