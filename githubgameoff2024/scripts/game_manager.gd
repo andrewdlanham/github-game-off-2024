@@ -71,15 +71,11 @@ func load_next_level():
 	add_child(current_level_instance) # TODO: Add to correct place in scene
 	
 func setup_level():
-	
 	print("setup_level()")
-	
-	
-	
 	# Despawn letter items
 	for child in letters.get_children():
 		child.queue_free()
-		print("Letter despawned!")
+		#print("Letter despawned!")
 	
 	# Get secret word
 	secret_word = random_word_generator.get_random_word()

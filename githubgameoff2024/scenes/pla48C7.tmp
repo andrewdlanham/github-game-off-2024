@@ -21,5 +21,3 @@ texture = ExtResource("1_2n7sx")
 
 [node name="SoundJump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_wcexh")
-volume_db = -10.0
-pitch_scale = 0.6
