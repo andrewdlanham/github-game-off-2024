@@ -5,16 +5,16 @@ extends Node2D
 @onready var secret_word_label: Label = %SecretWordLabel
 @onready var player: CharacterBody2D = %Player
 @onready var countdown_timer: Label = %CountdownTimer
-
+@onready var save_game: Node = %SaveGame
 
 var secret_word
 var spawn_points
 var available_spawn_points
 var level_paths = ["res://levels/level_1.tscn",
 					"res://levels/level_2.tscn",
+					"res://levels/level_1.tscn",
 					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn"
+					"res://levels/level_1.tscn"
 					]
 
 var level_set = level_paths # TODO: Change to random level set
@@ -26,8 +26,13 @@ var is_level_complete: bool
 var letter_item
 var letters
 
+var record_to_save
+var current_record
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	save_game.load_game()
 	
 	letters = %Letters
 	
@@ -107,6 +112,11 @@ func setup_level():
 		letters.add_child(letter_item_instance)
 	
 func handle_level_transition():
+	
+	# TODO: Update the record logic
+	record_to_save = timer_manager.elapsed_time
+	save_game.save_game()
+	
 	secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
 	is_level_complete = true
 	player.disable_movement()
@@ -133,3 +143,5 @@ func handle_level_transition():
 	timer_manager.unpause_timer()
 	is_level_complete = false
 	player.enable_movement()
+	
+	

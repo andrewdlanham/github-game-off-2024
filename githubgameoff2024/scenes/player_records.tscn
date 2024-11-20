@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ygrj528wwvyb"]
+
+[sub_resource type="GDScript" id="GDScript_bry8p"]
+script/source = "extends Node
+
+var record_to_write
+
+func save():
+	var save_dict = {
+		\"record_5_levels\" : record_to_write
+	}
+	return save_dict
+"
+
+[node name="Player Records" type="Node2D" groups=["Persist"]]
+script = SubResource("GDScript_bry8p")
