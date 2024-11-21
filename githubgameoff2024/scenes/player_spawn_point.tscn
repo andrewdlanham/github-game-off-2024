@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://by7pueixcw8ec"]
+
+[ext_resource type="Texture2D" uid="uid://cton4lq1ck8yi" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/player-spawn-point.png" id="1_lbqp2"]
+
+[node name="PlayerSpawnPoint" type="Area2D" groups=["PlayerSpawnPoint"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lbqp2")

@@ -18,7 +18,7 @@ script = ExtResource("1_xt174")
 unique_name_in_owner = true
 script = ExtResource("1_ken4y")
 
-[node name="RandomWordGenerator" type="Node2D" parent="GameManager"]
+[node name="RandomWordGenerator" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_vdels")
 
