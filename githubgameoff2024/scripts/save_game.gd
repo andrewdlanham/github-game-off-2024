@@ -1,6 +1,6 @@
 extends Node
 
-@onready var game_manager: Node2D = %GameManager
+@onready var game_manager: Node = %GameManager
 
 func save_game():
 	

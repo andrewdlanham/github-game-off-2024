@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 140.0
 const JUMP_VELOCITY = -300.0
 
+@onready var player: CharacterBody2D = $"."
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var player_sprite: Sprite2D = $Sprite2D
 @onready var sound_jump: AudioStreamPlayer2D = $SoundJump
@@ -57,3 +58,7 @@ func disable_collision():
 
 func enable_collision():
 	collision_shape.disabled = false
+	
+func move_to_spawn():
+	var player_spawn_point = get_tree().get_nodes_in_group("PlayerSpawnPoint")
+	player.position = player_spawn_point[0].position

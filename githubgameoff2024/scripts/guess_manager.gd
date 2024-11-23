@@ -1,8 +1,9 @@
 extends Node
 
-@onready var game_manager: Node2D = %GameManager
+@onready var game_manager: Node = %GameManager
 @onready var player: CharacterBody2D = %Player
 @onready var guess_input_box: LineEdit = %GuessInputBox
+@onready var level_manager: Node = %LevelManager
 
 var guessing_mode_enabled: bool
 
@@ -22,18 +23,18 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_guess") and not guessing_mode_enabled:
 		enter_guessing_mode()
 	elif Input.is_action_just_pressed("toggle_guess"):
-		game_manager.check_for_correct_guess(guess_input_box.text)
+		level_manager.check_for_correct_guess(guess_input_box.text)
 		exit_guessing_mode()
 		
 func enter_guessing_mode():
-	print("Entering guessing mode...")
+	#print("Entering guessing mode...")
 	player.is_enabled = false
 	guessing_mode_enabled = true
 	guess_input_box.visible = true
 	guess_input_box.grab_focus()
 
 func exit_guessing_mode():
-	print("Exiting guessing mode...")
+	#print("Exiting guessing mode...")
 	player.is_enabled = true
 	guessing_mode_enabled = false
 	guess_input_box.visible = false
