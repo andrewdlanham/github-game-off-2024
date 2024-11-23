@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 140.0
 const JUMP_VELOCITY = -300.0
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var player_sprite: Sprite2D = $Sprite2D
 @onready var sound_jump: AudioStreamPlayer2D = $SoundJump
 
@@ -44,9 +45,15 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func disable_movement():
-	print("Disabling movement...")
+	#print("Disabling movement...")
 	set_physics_process(false)
 	
 func enable_movement():
-	print("Enabling movement...")
+	#print("Enabling movement...")
 	set_physics_process(true)
+	
+func disable_collision():
+	collision_shape.disabled = true
+
+func enable_collision():
+	collision_shape.disabled = false

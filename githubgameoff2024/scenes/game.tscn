@@ -1,99 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://drjjghxylfqgw"]
+[gd_scene load_steps=2 format=3 uid="uid://dt3t427dwjwim"]
 
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_ken4y"]
-[ext_resource type="PackedScene" uid="uid://nv0xdio8knoa" path="res://scenes/player.tscn" id="1_nkibr"]
-[ext_resource type="Script" path="res://scripts/save_game.gd" id="1_xt174"]
-[ext_resource type="Script" path="res://scripts/random_word_generator.gd" id="2_vdels"]
-[ext_resource type="Script" path="res://scripts/guess_manager.gd" id="3_wb8e3"]
-[ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="4_tdhqy"]
-[ext_resource type="Script" path="res://scripts/timer_manager.gd" id="4_xca8h"]
+[ext_resource type="Script" path="res://scenes/menu_logic.gd" id="1_egrjh"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node"]
 
-[node name="SaveGame" type="Node" parent="."]
+[node name="MenuScene" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_xt174")
+script = ExtResource("1_egrjh")
 
-[node name="GameManager" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("1_ken4y")
-
-[node name="RandomWordGenerator" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_vdels")
-
-[node name="GuessManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("3_wb8e3")
-
-[node name="TimerManager" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("4_xca8h")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1, -146)
-zoom = Vector2(2, 2)
-
-[node name="Player" parent="." instance=ExtResource("1_nkibr")]
-unique_name_in_owner = true
-position = Vector2(0, -32)
-scale = Vector2(2, 2)
-
-[node name="CountdownTimer" type="Label" parent="."]
-unique_name_in_owner = true
-visible = false
+[node name="StartGameButton" type="Button" parent="MenuScene"]
 z_index = 10
-offset_left = -24.0
-offset_top = -200.0
-offset_right = 28.0
-offset_bottom = -149.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_tdhqy")
-theme_override_font_sizes/font_size = 50
-text = "3"
-horizontal_alignment = 1
+offset_left = -112.0
+offset_top = -64.0
+offset_right = 115.0
+offset_bottom = -16.0
+text = "BUTTON TO PLAY THE GAME"
 
-[node name="TimerLabel" type="Label" parent="."]
-unique_name_in_owner = true
-z_index = 5
-offset_left = -56.0
-offset_top = -280.0
-offset_right = 56.0
-offset_bottom = -248.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_tdhqy")
-theme_override_font_sizes/font_size = 32
-text = "0.0"
+[node name="Label" type="Label" parent="MenuScene"]
+offset_left = -152.0
+offset_top = -272.0
+offset_right = 160.0
+offset_bottom = -160.0
+theme_override_font_sizes/font_size = 64
+text = "TOP TEXT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="TimerLabel"]
-z_index = 4
-z_as_relative = false
-offset_left = -8.0
-offset_top = -8.0
-offset_right = 120.0
-offset_bottom = 40.0
-
-[node name="SecretWordLabel" type="Label" parent="."]
-unique_name_in_owner = true
-offset_left = -95.0
-offset_top = -216.0
-offset_right = 96.0
-offset_bottom = -170.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("4_tdhqy")
-theme_override_font_sizes/font_size = 16
+[node name="Label2" type="Label" parent="MenuScene"]
+offset_left = -208.0
+offset_top = 144.0
+offset_right = 231.0
+offset_bottom = 256.0
+theme_override_font_sizes/font_size = 64
+text = "BOTTOM TEXT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GuessInputBox" type="LineEdit" parent="."]
-unique_name_in_owner = true
-offset_left = -79.0
-offset_top = -135.0
-offset_right = 79.0
-offset_bottom = -104.0
+[node name="Camera2D" type="Camera2D" parent="MenuScene"]
 
-[node name="Letters" type="Node" parent="."]
-unique_name_in_owner = true
+[connection signal="pressed" from="MenuScene/StartGameButton" to="MenuScene" method="_on_start_game_button_pressed"]

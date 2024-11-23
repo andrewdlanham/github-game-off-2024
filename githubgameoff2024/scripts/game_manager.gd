@@ -6,8 +6,8 @@ extends Node2D
 @onready var secret_word_label: Label = %SecretWordLabel
 @onready var player: CharacterBody2D = %Player
 @onready var countdown_timer: Label = %CountdownTimer
-@onready var save_game: Node = %SaveGame
 @onready var letters: Node = %Letters
+@onready var save_game: Node = %SaveGame
 
 @onready var letter_item = load("res://scenes/letter_item.tscn")
 
@@ -67,6 +67,7 @@ func handle_level_transition():
 	secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
 	is_level_complete = true
 	player.disable_movement()
+	player.disable_collision()
 	
 	await get_tree().create_timer(2).timeout # Let the player process that they beat the level
 	cleanup_level_end()
@@ -89,6 +90,7 @@ func handle_level_transition():
 	timer_manager.unpause_timer()
 	is_level_complete = false
 	player.enable_movement()
+	player.enable_collision()
 
 func load_next_level():
 	

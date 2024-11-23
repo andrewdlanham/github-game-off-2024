@@ -12,9 +12,13 @@ func _ready() -> void:
 	guessing_mode_enabled = false
 	guess_input_box.visible = false 	# Hide guess input box
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	
+	if guessing_mode_enabled:
+		guess_input_box.text = guess_input_box.text.to_upper()
+		guess_input_box.caret_column = guess_input_box.text.length()
+	
 	if Input.is_action_just_pressed("toggle_guess") and not guessing_mode_enabled:
 		enter_guessing_mode()
 	elif Input.is_action_just_pressed("toggle_guess"):
@@ -36,4 +40,7 @@ func exit_guessing_mode():
 	guess_input_box.text = ""
 	guess_input_box.release_focus()
 
+
+func _on_guess_input_box_text_changed(new_text: String) -> void:
+	guess_input_box.text = new_text.to_upper()
 	
