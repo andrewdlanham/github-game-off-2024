@@ -40,6 +40,7 @@ func _ready() -> void:
 	save_game.load_game()
 	level_set = level_paths		# TODO: Randomize level_set
 	
+	cleanup_level_end()
 	load_next_level()
 	setup_level()
 	
@@ -59,25 +60,24 @@ func check_for_correct_guess(guess):
 func handle_level_transition():
 	
 	# TODO: Update the record logic
+	timer_manager.pause_timer()
 	record_to_save = timer_manager.elapsed_time
 	save_game.save_game()
-	#
 	
 	secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
 	is_level_complete = true
 	player.disable_movement()
 	
-	timer_manager.pause_timer()
-	
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(2).timeout # Let the player process that they beat the level
+	cleanup_level_end()
 	load_next_level()
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.1).timeout
 	setup_level()
-	secret_word_label.add_theme_color_override("font_color", Color(1, 1, 1))
 	
 	# Countdown timer
 	countdown_timer.text = '3'
 	countdown_timer.visible = true
+	
 	await get_tree().create_timer(1.0).timeout
 	countdown_timer.text = '2'
 	await get_tree().create_timer(1.0).timeout
@@ -110,18 +110,6 @@ func setup_level():
 	var player_spawn_point = get_tree().get_nodes_in_group("PlayerSpawnPoint")
 	player.position = player_spawn_point[0].position
 	
-	# Despawn extra letter items from previous level
-	for child in letters.get_children():
-		child.queue_free()
-	
-	# Get secret word
-	secret_word = random_word_generator.get_random_word()
-	print("secret word: " + secret_word)
-	
-	# Set up word label
-	secret_word_label.text = ""
-	for n in range (secret_word.length()): secret_word_label.text += "-"
-	
 	# Select letter item spawn points
 	available_spawn_points = []
 	available_spawn_points = get_tree().get_nodes_in_group("LetterSpawnPoint")
@@ -142,3 +130,18 @@ func setup_level():
 		letter_item_instance.position = spawn_points[n].position
 		letters.add_child(letter_item_instance)
 	
+func cleanup_level_end():
+	
+	secret_word_label.add_theme_color_override("font_color", Color(1, 1, 1))
+	
+	# Get next secret word
+	secret_word = random_word_generator.get_random_word()
+	print("secret word: " + secret_word)
+	
+	# Set up word label
+	secret_word_label.text = ""
+	for n in range (secret_word.length()): secret_word_label.text += "-"
+	
+	# Despawn extra letter items from previous level
+	for child in letters.get_children():
+		child.queue_free()

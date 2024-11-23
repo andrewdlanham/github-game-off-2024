@@ -55,12 +55,25 @@ horizontal_alignment = 1
 
 [node name="TimerLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = -24.0
-offset_top = -272.0
-offset_right = 28.0
-offset_bottom = -254.0
+z_index = 5
+offset_left = -56.0
+offset_top = -280.0
+offset_right = 56.0
+offset_bottom = -248.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_tdhqy")
+theme_override_font_sizes/font_size = 32
 text = "0.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="TimerLabel"]
+z_index = 4
+z_as_relative = false
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 120.0
+offset_bottom = 40.0
 
 [node name="SecretWordLabel" type="Label" parent="."]
 unique_name_in_owner = true

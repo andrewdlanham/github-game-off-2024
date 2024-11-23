@@ -75,4 +75,4 @@ tile_map_data = PackedByteArray("AADy//H/AQACAAIAAADw/+7/AQACAAIAAADw/+//AQACAAI
 tile_set = ExtResource("3_7yg2b")
 
 [node name="PlayerSpawnPoint" parent="." instance=ExtResource("4_k733q")]
-position = Vector2(48, -72)
+position = Vector2(-8, -8)
