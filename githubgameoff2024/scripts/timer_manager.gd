@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	# Update elapsed_time if timer is unpaused
 	if !is_timer_paused:
 		elapsed_time += delta
-		timer_label.text = format_elapsed_time(elapsed_time)
+		timer_label.text = get_formatted_elapsed_time()
 
 func unpause_timer():
 	is_timer_paused = false
@@ -23,7 +23,11 @@ func unpause_timer():
 func pause_timer():
 	is_timer_paused = true
 	
-func format_elapsed_time(elapsed_seconds):
-	var minutes = int(elapsed_seconds / 60)
-	var seconds = int(elapsed_seconds) % 60
-	return str(minutes) + ":" + str(seconds)
+func get_formatted_elapsed_time():
+	var minutes = int(elapsed_time / 60)
+	var seconds = elapsed_time - (minutes * 60)
+	var format_string
+	if minutes > 0: format_string = str(minutes) + ":" + "%.*f"
+	else: format_string = "%.*f"
+	return (format_string % [1, seconds])
+	
