@@ -29,18 +29,6 @@ var spawn_points
 var available_spawn_points
 
 
-
-func _process(_delta: float) -> void:
-	
-	# Check if player has revealed the secret word
-	if secret_word_label.text == secret_word && !is_level_complete:
-		#print("LEVEL COMPLETE")
-		secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
-		freeze_level()
-		await get_tree().create_timer(2).timeout # Let the player process that they beat the level
-		handle_level_transition()
-		unfreeze_level()
-
 func freeze_level():
 	is_level_complete = true
 	timer_manager.pause_timer()
@@ -56,11 +44,21 @@ func unfreeze_level():
 	player.enable_collision()
 	guess_manager.set_process(true)
 
-func check_for_correct_guess(guess):
-	print("Checking if guess is correct...")
-	if guess.to_upper() == secret_word:
+func check_for_level_end(guess):
+	
+	if guess != null && guess.to_upper() == secret_word:
 		print("Correct guess!")
 		secret_word_label.text = secret_word
+		
+	# Check if player has revealed the secret word
+	if secret_word_label.text == secret_word && !is_level_complete:
+		print("LEVEL COMPLETE")
+		sound_manager.guess_correct_sound.play()
+		secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
+		freeze_level()
+		await get_tree().create_timer(2).timeout # Let the player process that they beat the level
+		await handle_level_transition()
+		unfreeze_level()
 
 
 func prepare_first_level():
@@ -100,8 +98,6 @@ func handle_level_transition():
 	sound_manager.timer_go_sound.play()
 	countdown_timer.visible = false
 	
-	
-	
 
 func load_next_level():
 	
@@ -118,7 +114,7 @@ func load_next_level():
 	
 func prepare_level():
 	print("setup_level()")
-	player.move_to_spawn()
+	await player.move_to_spawn()
 	set_up_secret_word()
 	
 	# Select letter item spawn points

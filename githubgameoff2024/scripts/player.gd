@@ -8,6 +8,8 @@ const JUMP_VELOCITY = -300.0
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var player_sprite: Sprite2D = $Sprite2D
 @onready var sound_jump: AudioStreamPlayer2D = $SoundJump
+@onready var level_manager: Node = %LevelManager
+
 
 const jump_sound = preload("res://sounds/jump.wav")
 

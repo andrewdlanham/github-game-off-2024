@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://iotor00ogoqu"]
+[gd_scene load_steps=10 format=3 uid="uid://iotor00ogoqu"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_0an02"]
 [ext_resource type="PackedScene" uid="uid://np3sjtdqv647" path="res://scenes/save_game.tscn" id="1_n2uas"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/timer_manager.gd" id="4_k1sr0"]
 [ext_resource type="PackedScene" uid="uid://nv0xdio8knoa" path="res://scenes/player.tscn" id="5_nfoh7"]
 [ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="6_h8f1c"]
+[ext_resource type="AudioStream" uid="uid://ch8wfiynh0qnb" path="res://sounds/text.wav" id="6_yr12i"]
 
 [node name="GameplayScene" type="Node"]
 
@@ -28,6 +29,9 @@ script = ExtResource("2_4m16p")
 [node name="GuessManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_2dtri")
+
+[node name="TextSound" type="AudioStreamPlayer2D" parent="GuessManager"]
+stream = ExtResource("6_yr12i")
 
 [node name="TimerManager" type="Node" parent="."]
 unique_name_in_owner = true

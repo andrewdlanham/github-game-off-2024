@@ -8,16 +8,19 @@ extends Node2D
 
 var letterPosition # Letter's position in secret word
 var hiddenLetter = ''
+var letterCollected = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#print("Letter ready.")
 	letter_label.text = '?'
+	
 
 func _on_body_entered(_body: Node2D) -> void:
-	#print("Letter picked up: " + hiddenLetter)
+	if !letterCollected:
+		letterCollected = true
+		collect_sound.play()
+		secret_word_label.text[letterPosition] = hiddenLetter
+		self.visible = false
+		get_node("/root/GameplayScene/LevelManager").check_for_level_end(null)
 	
-	secret_word_label.text[letterPosition] = hiddenLetter
-	collect_sound.play()
-	await get_tree().create_timer(0.2).timeout
-	queue_free()

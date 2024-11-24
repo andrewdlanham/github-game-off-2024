@@ -1,5 +1,8 @@
 extends Node
 
+@onready var text_sound: AudioStreamPlayer2D = $TextSound
+
+
 @onready var game_manager: Node = %GameManager
 @onready var player: CharacterBody2D = %Player
 @onready var guess_input_box: LineEdit = %GuessInputBox
@@ -23,7 +26,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_guess") and not guessing_mode_enabled:
 		enter_guessing_mode()
 	elif Input.is_action_just_pressed("toggle_guess"):
-		level_manager.check_for_correct_guess(guess_input_box.text)
+		level_manager.check_for_level_end(guess_input_box.text)
 		exit_guessing_mode()
 		
 func enter_guessing_mode():
@@ -44,4 +47,5 @@ func exit_guessing_mode():
 
 func _on_guess_input_box_text_changed(new_text: String) -> void:
 	guess_input_box.text = new_text.to_upper()
+	text_sound.play()
 	
