@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dt3t427dwjwim"]
 
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_b4ooi"]
-[ext_resource type="Script" path="res://scenes/menu_logic.gd" id="1_egrjh"]
+[ext_resource type="Script" path="res://scripts/menu_logic.gd" id="1_egrjh"]
 [ext_resource type="AudioStream" uid="uid://cny46ph8gpp0b" path="res://sounds/timer_tick.wav" id="2_dxn30"]
 [ext_resource type="AudioStream" uid="uid://cx1d6cfnjon5n" path="res://sounds/timer_go.wav" id="3_i6xyf"]
 [ext_resource type="AudioStream" uid="uid://pea54us783t3" path="res://sounds/guess_correct.wav" id="4_b87i5"]

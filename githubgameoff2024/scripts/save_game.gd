@@ -2,18 +2,35 @@ extends Node
 
 @onready var game_manager: Node = %GameManager
 
-func save_game():
+func save_game(new_record, num_levels):
 	
 	print("save_game()")
 	
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
-	
-	var save_dict = {
-		"record_5_levels" : game_manager.record_to_save
-	}
-	
+	var old_save_data = load_game()
+	var save_dict
+	if num_levels == 5:
+		save_dict = {
+			"record_5_levels"  : new_record,
+			"record_15_levels" : old_save_data.record_15_levels,
+			"record_25_levels" : old_save_data.record_25_levels,
+		}
+	elif num_levels == 15:
+		save_dict = {
+			"record_5_levels"  : old_save_data.record_5_levels,
+			"record_15_levels" : new_record,
+			"record_25_levels" : old_save_data.record_25_levels,
+		}
+	else: 
+		save_dict = {
+			"record_5_levels"  : old_save_data.record_5_levels,
+			"record_15_levels" : old_save_data.record_15_levels,
+			"record_25_levels" : new_record,
+		}
 	var json_string = JSON.stringify(save_dict)
 	save_file.store_line(json_string)
+	
+	print("Data saved: " + json_string)
 
 func load_game():
 	
@@ -26,8 +43,16 @@ func load_game():
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var saved_data
+	print("Save file length: " + str(save_file.get_length()))
+	
+	if save_file.get_length() == 0:
+		return {"record_5_levels"  : 999,
+				"record_15_levels" : 999,
+				"record_25_levels" : 999}
+	
 	while save_file.get_position() < save_file.get_length():
-		
+		print("Reading save data...")
 		var json_string = save_file.get_line()
 
 		# Creates the helper class to interact with JSON.
@@ -40,9 +65,11 @@ func load_game():
 			continue
 
 		# Get the data from the JSON object.
-		var saved_data = json.data
+		saved_data = json.data
 		
 		# Print save data for debugging purposes
+		print("Player's save data:")
 		print(saved_data)
 		
-		game_manager.current_record = saved_data.record_5_levels
+	print("Returning save data...")
+	return saved_data

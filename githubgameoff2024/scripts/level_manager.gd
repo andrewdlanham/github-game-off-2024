@@ -9,14 +9,20 @@ extends Node
 @onready var letters: Node = %Letters
 @onready var random_word_generator: Node2D = %RandomWordGenerator
 @onready var sound_manager: Node = get_node("/root/Game/SoundManager")
+@onready var game_manager: Node = %GameManager
 
 
 var secret_word
 var level_paths = ["res://levels/level_1.tscn",
-					"res://levels/level_2.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
 					"res://levels/level_1.tscn",
 					"res://levels/level_2.tscn",
-					"res://levels/level_1.tscn"
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn"
 					]
 
 var level_set = []
@@ -56,6 +62,12 @@ func check_for_level_end(guess):
 		sound_manager.guess_correct_sound.play()
 		secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
 		freeze_level()
+		
+		if level_set_idx == level_set.size() - 1:
+			print("FINAL LEVEL")
+			await game_manager.end_game(timer_manager.elapsed_time)
+			print("THIS SHOULD NOT PRINT")
+		
 		await get_tree().create_timer(2).timeout # Let the player process that they beat the level
 		await handle_level_transition()
 		unfreeze_level()
@@ -67,7 +79,8 @@ func prepare_first_level():
 	await get_tree().create_timer(0.2).timeout
 	
 	# Randomize level set
-	for n in range(level_paths.size()):
+	#for n in range(level_paths.size()):
+	for n in range(2):
 		var random_level = level_paths[randi_range(0, level_paths.size() - 1)]
 		level_set.append(random_level)
 		level_paths.erase(random_level)
@@ -85,16 +98,17 @@ func handle_level_transition():
 	prepare_level()
 	
 	# Countdown timer
+	# TODO: Update timer values once done testing
 	countdown_timer.visible = true
 	countdown_timer.text = '3'
 	sound_manager.timer_tick_sound.play()
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.2).timeout
 	countdown_timer.text = '2'
 	sound_manager.timer_tick_sound.play()
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.2).timeout
 	countdown_timer.text = '1'
 	sound_manager.timer_tick_sound.play()
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.2).timeout
 	sound_manager.timer_go_sound.play()
 	countdown_timer.visible = false
 	
