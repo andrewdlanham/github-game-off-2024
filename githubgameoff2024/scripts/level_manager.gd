@@ -3,16 +3,15 @@ extends Node
 @onready var countdown_timer: Label = %CountdownTimer
 @onready var timer_manager: Node = %TimerManager
 @onready var guess_manager: Node = %GuessManager
-
 @onready var secret_word_label: Label = %SecretWordLabel
 @onready var player: CharacterBody2D = %Player
-
 @onready var letter_item = load("res://scenes/letter_item.tscn")
 @onready var letters: Node = %Letters
 @onready var random_word_generator: Node2D = %RandomWordGenerator
+@onready var sound_manager: Node = get_node("/root/Game/SoundManager")
+
 
 var secret_word
-
 var level_paths = ["res://levels/level_1.tscn",
 					"res://levels/level_2.tscn",
 					"res://levels/level_1.tscn",
@@ -28,6 +27,8 @@ var current_level_instance
 var is_level_complete: bool
 var spawn_points
 var available_spawn_points
+
+
 
 func _process(_delta: float) -> void:
 	
@@ -86,15 +87,21 @@ func handle_level_transition():
 	prepare_level()
 	
 	# Countdown timer
-	countdown_timer.text = '3'
 	countdown_timer.visible = true
-	
+	countdown_timer.text = '3'
+	sound_manager.timer_tick_sound.play()
 	await get_tree().create_timer(1.0).timeout
 	countdown_timer.text = '2'
+	sound_manager.timer_tick_sound.play()
 	await get_tree().create_timer(1.0).timeout
 	countdown_timer.text = '1'
+	sound_manager.timer_tick_sound.play()
 	await get_tree().create_timer(1.0).timeout
+	sound_manager.timer_go_sound.play()
 	countdown_timer.visible = false
+	
+	
+	
 
 func load_next_level():
 	

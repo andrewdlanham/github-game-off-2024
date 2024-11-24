@@ -9,7 +9,7 @@ const JUMP_VELOCITY = -300.0
 @onready var player_sprite: Sprite2D = $Sprite2D
 @onready var sound_jump: AudioStreamPlayer2D = $SoundJump
 
-const jump_sound = preload("res://retro-jump-3-236683.mp3")
+const jump_sound = preload("res://sounds/jump.wav")
 
 var is_enabled: bool
 

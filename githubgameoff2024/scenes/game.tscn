@@ -1,8 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dt3t427dwjwim"]
+[gd_scene load_steps=5 format=3 uid="uid://dt3t427dwjwim"]
 
+[ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_b4ooi"]
 [ext_resource type="Script" path="res://scenes/menu_logic.gd" id="1_egrjh"]
+[ext_resource type="AudioStream" uid="uid://cny46ph8gpp0b" path="res://sounds/timer_tick.wav" id="2_dxn30"]
+[ext_resource type="AudioStream" uid="uid://cx1d6cfnjon5n" path="res://sounds/timer_go.wav" id="3_i6xyf"]
 
 [node name="Game" type="Node"]
+
+[node name="SoundManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_b4ooi")
+
+[node name="TimerTickSound" type="AudioStreamPlayer2D" parent="SoundManager"]
+stream = ExtResource("2_dxn30")
+
+[node name="TimerGoSound" type="AudioStreamPlayer2D" parent="SoundManager"]
+stream = ExtResource("3_i6xyf")
 
 [node name="MenuScene" type="Node" parent="."]
 unique_name_in_owner = true
