@@ -1,31 +1,40 @@
 extends Node
 
-@onready var game_manager: Node = %GameManager
+var selected_num_levels
 
-func save_game(new_record, num_levels):
+func save_game(new_record, num_levels, reset_all_records):
 	
 	print("save_game()")
 	
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	var old_save_data = load_game()
+	if reset_all_records == true: old_save_data = null
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	
 	var save_dict
-	if num_levels == 5:
+	if old_save_data == null:
+		print("Initializing first time records...")
+		save_dict = {
+			"record_5_levels"  : -1,
+			"record_15_levels" : -1,
+			"record_25_levels" : -1
+		}
+	elif num_levels == 5:
 		save_dict = {
 			"record_5_levels"  : new_record,
 			"record_15_levels" : old_save_data.record_15_levels,
-			"record_25_levels" : old_save_data.record_25_levels,
+			"record_25_levels" : old_save_data.record_25_levels
 		}
 	elif num_levels == 15:
 		save_dict = {
 			"record_5_levels"  : old_save_data.record_5_levels,
 			"record_15_levels" : new_record,
-			"record_25_levels" : old_save_data.record_25_levels,
+			"record_25_levels" : old_save_data.record_25_levels
 		}
 	else: 
 		save_dict = {
 			"record_5_levels"  : old_save_data.record_5_levels,
 			"record_15_levels" : old_save_data.record_15_levels,
-			"record_25_levels" : new_record,
+			"record_25_levels" : new_record
 		}
 	var json_string = JSON.stringify(save_dict)
 	save_file.store_line(json_string)
@@ -38,7 +47,7 @@ func load_game():
 	
 	if not FileAccess.file_exists("user://savegame.save"):
 		print("No save to load!")
-		return
+		return null
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.

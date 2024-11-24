@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://iotor00ogoqu"]
+[gd_scene load_steps=9 format=3 uid="uid://iotor00ogoqu"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_0an02"]
-[ext_resource type="PackedScene" uid="uid://np3sjtdqv647" path="res://scenes/save_game.tscn" id="1_n2uas"]
 [ext_resource type="Script" path="res://scripts/random_word_generator.gd" id="2_4m16p"]
 [ext_resource type="PackedScene" uid="uid://b23u0c86iqx25" path="res://scenes/level_manager.tscn" id="2_hqhpp"]
 [ext_resource type="Script" path="res://scripts/guess_manager.gd" id="3_2dtri"]
@@ -17,9 +16,6 @@ unique_name_in_owner = true
 script = ExtResource("1_0an02")
 
 [node name="LevelManager" parent="." instance=ExtResource("2_hqhpp")]
-unique_name_in_owner = true
-
-[node name="SaveGame" parent="." instance=ExtResource("1_n2uas")]
 unique_name_in_owner = true
 
 [node name="RandomWordGenerator" type="Node2D" parent="."]

@@ -10,6 +10,7 @@ extends Node
 @onready var random_word_generator: Node2D = %RandomWordGenerator
 @onready var sound_manager: Node = get_node("/root/Game/SoundManager")
 @onready var game_manager: Node = %GameManager
+@onready var save_manager: Node = get_node("/root/Game/SaveManager")
 
 
 var secret_word
@@ -27,7 +28,6 @@ var level_paths = ["res://levels/level_1.tscn",
 
 var level_set = []
 @onready var level_set_idx = -1
-var num_levels
 var current_level
 var current_level_instance
 var is_level_complete: bool
@@ -41,7 +41,7 @@ func freeze_level():
 	player.disable_movement()
 	player.disable_collision()
 	guess_manager.set_process(false)
-	guess_manager.exit_guessing_mode
+	guess_manager.exit_guessing_mode()
 
 func unfreeze_level():
 	is_level_complete = false
@@ -67,6 +67,7 @@ func check_for_level_end(guess):
 			print("FINAL LEVEL")
 			await game_manager.end_game(timer_manager.elapsed_time)
 			print("THIS SHOULD NOT PRINT")
+			return
 		
 		await get_tree().create_timer(2).timeout # Let the player process that they beat the level
 		await handle_level_transition()
@@ -75,12 +76,10 @@ func check_for_level_end(guess):
 
 func prepare_first_level():
 	print("prepare_first_level()")
-	#num_levels = selected_num_levels
 	await get_tree().create_timer(0.2).timeout
 	
 	# Randomize level set
-	#for n in range(level_paths.size()):
-	for n in range(2):
+	for n in range(save_manager.selected_num_levels):
 		var random_level = level_paths[randi_range(0, level_paths.size() - 1)]
 		level_set.append(random_level)
 		level_paths.erase(random_level)

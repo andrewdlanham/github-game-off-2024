@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt3t427dwjwim"]
+[gd_scene load_steps=7 format=3 uid="uid://dt3t427dwjwim"]
 
+[ext_resource type="PackedScene" uid="uid://np3sjtdqv647" path="res://scenes/save_manager.tscn" id="1_3mcil"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_b4ooi"]
-[ext_resource type="Script" path="res://scripts/menu_logic.gd" id="1_egrjh"]
 [ext_resource type="AudioStream" uid="uid://cny46ph8gpp0b" path="res://sounds/timer_tick.wav" id="2_dxn30"]
 [ext_resource type="AudioStream" uid="uid://cx1d6cfnjon5n" path="res://sounds/timer_go.wav" id="3_i6xyf"]
 [ext_resource type="AudioStream" uid="uid://pea54us783t3" path="res://sounds/guess_correct.wav" id="4_b87i5"]
+[ext_resource type="PackedScene" uid="uid://b2e55bkawvrt6" path="res://scenes/menu_scene.tscn" id="5_mdstm"]
 
 [node name="Game" type="Node"]
+
+[node name="SaveManager" parent="." instance=ExtResource("1_3mcil")]
 
 [node name="SoundManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -21,38 +24,5 @@ stream = ExtResource("3_i6xyf")
 [node name="GuessCorrectSound" type="AudioStreamPlayer2D" parent="SoundManager"]
 stream = ExtResource("4_b87i5")
 
-[node name="MenuScene" type="Node" parent="."]
+[node name="MenuScene" parent="." instance=ExtResource("5_mdstm")]
 unique_name_in_owner = true
-script = ExtResource("1_egrjh")
-
-[node name="StartGameButton" type="Button" parent="MenuScene"]
-z_index = 10
-offset_left = -112.0
-offset_top = -64.0
-offset_right = 115.0
-offset_bottom = -16.0
-text = "BUTTON TO PLAY THE GAME"
-
-[node name="Label" type="Label" parent="MenuScene"]
-offset_left = -152.0
-offset_top = -272.0
-offset_right = 160.0
-offset_bottom = -160.0
-theme_override_font_sizes/font_size = 64
-text = "TOP TEXT"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="MenuScene"]
-offset_left = -208.0
-offset_top = 144.0
-offset_right = 231.0
-offset_bottom = 256.0
-theme_override_font_sizes/font_size = 64
-text = "BOTTOM TEXT"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Camera2D" type="Camera2D" parent="MenuScene"]
-
-[connection signal="pressed" from="MenuScene/StartGameButton" to="MenuScene" method="_on_start_game_button_pressed"]
