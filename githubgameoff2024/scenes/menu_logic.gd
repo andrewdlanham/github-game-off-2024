@@ -18,4 +18,5 @@ func _on_start_game_button_pressed() -> void:
 	print("Loading game...")
 	var gameplay_scene = load("res://scenes/gameplay_scene.tscn")
 	get_tree().root.add_child(gameplay_scene.instantiate())
+	
 	menu_scene.queue_free()

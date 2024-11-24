@@ -2,6 +2,7 @@ extends Node
 
 @onready var countdown_timer: Label = %CountdownTimer
 @onready var timer_manager: Node = %TimerManager
+@onready var guess_manager: Node = %GuessManager
 
 @onready var secret_word_label: Label = %SecretWordLabel
 @onready var player: CharacterBody2D = %Player
@@ -19,7 +20,7 @@ var level_paths = ["res://levels/level_1.tscn",
 					"res://levels/level_1.tscn"
 					]
 
-var level_set
+var level_set = []
 @onready var level_set_idx = -1
 var num_levels
 var current_level
@@ -32,8 +33,27 @@ func _process(_delta: float) -> void:
 	
 	# Check if player has revealed the secret word
 	if secret_word_label.text == secret_word && !is_level_complete:
-		print("LEVEL COMPLETE")
+		#print("LEVEL COMPLETE")
+		secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
+		freeze_level()
+		await get_tree().create_timer(2).timeout # Let the player process that they beat the level
 		handle_level_transition()
+		unfreeze_level()
+
+func freeze_level():
+	is_level_complete = true
+	timer_manager.pause_timer()
+	player.disable_movement()
+	player.disable_collision()
+	guess_manager.set_process(false)
+	guess_manager.exit_guessing_mode
+
+func unfreeze_level():
+	is_level_complete = false
+	timer_manager.unpause_timer()
+	player.enable_movement()
+	player.enable_collision()
+	guess_manager.set_process(true)
 
 func check_for_correct_guess(guess):
 	print("Checking if guess is correct...")
@@ -46,21 +66,20 @@ func prepare_first_level():
 	print("prepare_first_level()")
 	#num_levels = selected_num_levels
 	await get_tree().create_timer(0.2).timeout
-	level_set = level_paths		# TODO: Randomize level_set
-	load_next_level()
-	prepare_level()
-	timer_manager.unpause_timer()
+	
+	# Randomize level set
+	for n in range(level_paths.size()):
+		var random_level = level_paths[randi_range(0, level_paths.size() - 1)]
+		level_set.append(random_level)
+		level_paths.erase(random_level)
+	
+	#
+	freeze_level()
+	await handle_level_transition()
+	unfreeze_level()
 
 func handle_level_transition():
 	
-	timer_manager.pause_timer()
-	
-	secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
-	is_level_complete = true
-	player.disable_movement()
-	player.disable_collision()
-	
-	await get_tree().create_timer(2).timeout # Let the player process that they beat the level
 	cleanup_level_end()
 	load_next_level()
 	await get_tree().create_timer(0.1).timeout
@@ -76,12 +95,6 @@ func handle_level_transition():
 	countdown_timer.text = '1'
 	await get_tree().create_timer(1.0).timeout
 	countdown_timer.visible = false
-	#
-	
-	timer_manager.unpause_timer()
-	is_level_complete = false
-	player.enable_movement()
-	player.enable_collision()
 
 func load_next_level():
 	
