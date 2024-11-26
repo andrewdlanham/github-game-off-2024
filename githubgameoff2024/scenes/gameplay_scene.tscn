@@ -11,6 +11,15 @@
 
 [node name="GameplayScene" type="Node"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -146)
+zoom = Vector2(2, 2)
+
+[node name="Player" parent="." instance=ExtResource("5_nfoh7")]
+unique_name_in_owner = true
+position = Vector2(0, -32)
+scale = Vector2(2, 2)
+
 [node name="GameManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_0an02")
@@ -32,15 +41,6 @@ stream = ExtResource("6_yr12i")
 [node name="TimerManager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("4_k1sr0")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-1, -146)
-zoom = Vector2(2, 2)
-
-[node name="Player" parent="." instance=ExtResource("5_nfoh7")]
-unique_name_in_owner = true
-position = Vector2(0, -32)
-scale = Vector2(2, 2)
 
 [node name="CountdownTimer" type="Label" parent="."]
 unique_name_in_owner = true

@@ -14,7 +14,7 @@ func _ready() -> void:
 	best_5_word_time.text = "Best Time: " + str(save_data.record_5_levels)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_reset_records_button_pressed() -> void:
