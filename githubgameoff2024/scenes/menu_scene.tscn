@@ -114,6 +114,7 @@ offset_right = 216.0
 color = Color(0.525101, 0.525101, 0.525101, 1)
 
 [node name="Best5WordTime" type="Label" parent="GrayBackground"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 136.0
@@ -122,13 +123,8 @@ theme_override_fonts/font = ExtResource("2_tpqyd")
 theme_override_font_sizes/font_size = 16
 text = "PB:"
 
-[connection signal="pressed" from="Play5Words" to="." method="_on_play_5_words_pressed"]
 [connection signal="pressed" from="Play5Words" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="Play5Words" to="." method="_on_play_5_words_pressed"]
 [connection signal="pressed" from="Play15Words" to="." method="_on_play_15_words_pressed"]
-[connection signal="pressed" from="Play15Words" to="." method="_on_play_5_words_pressed"]
-[connection signal="pressed" from="Play15Words" to="." method="_on_start_game_button_pressed"]
-[connection signal="pressed" from="Play25Words" to="." method="_on_play_15_words_pressed"]
 [connection signal="pressed" from="Play25Words" to="." method="_on_play_25_words_pressed"]
-[connection signal="pressed" from="Play25Words" to="." method="_on_play_5_words_pressed"]
-[connection signal="pressed" from="Play25Words" to="." method="_on_start_game_button_pressed"]
 [connection signal="pressed" from="ResetRecordsButton" to="." method="_on_reset_records_button_pressed"]

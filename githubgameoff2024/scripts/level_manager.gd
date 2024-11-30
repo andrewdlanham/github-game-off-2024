@@ -23,6 +23,36 @@ var level_paths = ["res://levels/level_1.tscn",
 					"res://levels/level_2.tscn",
 					"res://levels/level_2.tscn",
 					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_1.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
+					"res://levels/level_2.tscn",
 					"res://levels/level_2.tscn"
 					]
 
@@ -30,13 +60,13 @@ var level_set = []
 @onready var level_set_idx = -1
 var current_level
 var current_level_instance
-var is_level_complete: bool
+var is_level_complete: bool = false
 var spawn_points
 var available_spawn_points
 
 
 func freeze_level():
-	is_level_complete = true
+	print("freeze_level()")
 	timer_manager.pause_timer()
 	player.disable_movement()
 	player.disable_collision()
@@ -44,14 +74,14 @@ func freeze_level():
 	guess_manager.exit_guessing_mode()
 
 func unfreeze_level():
-	is_level_complete = false
+	print("unfreeze_level()")
 	timer_manager.unpause_timer()
 	player.enable_movement()
 	player.enable_collision()
 	guess_manager.set_process(true)
 
 func check_for_level_end(guess):
-	
+	print("check_for_level_end()")
 	if guess != null && guess.to_upper() == secret_word:
 		print("Correct guess!")
 		secret_word_label.text = secret_word
@@ -59,8 +89,10 @@ func check_for_level_end(guess):
 	# Check if player has revealed the secret word
 	if secret_word_label.text == secret_word && !is_level_complete:
 		print("LEVEL COMPLETE")
+		is_level_complete = true
 		sound_manager.guess_correct_sound.play()
 		secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))
+		
 		freeze_level()
 		
 		if level_set_idx == level_set.size() - 1:
@@ -71,6 +103,7 @@ func check_for_level_end(guess):
 		
 		await get_tree().create_timer(2).timeout # Let the player process that they beat the level
 		await handle_level_transition()
+		is_level_complete = false
 		unfreeze_level()
 
 
@@ -90,11 +123,12 @@ func prepare_first_level():
 	unfreeze_level()
 
 func handle_level_transition():
-	
+	print("handle_level_transition()")
 	cleanup_level_end()
+	unload_current_level()
 	load_next_level()
-	await get_tree().create_timer(0.1).timeout
 	prepare_level()
+	print("line after prepare_level() --------------------")
 	
 	# Countdown timer
 	# TODO: Update timer values once done testing
@@ -111,12 +145,13 @@ func handle_level_transition():
 	sound_manager.timer_go_sound.play()
 	countdown_timer.visible = false
 	
-
-func load_next_level():
-	
+func unload_current_level():
+	print("unload_current_level()")
 	if current_level_instance:
 		print("Unloading current level...")
 		current_level_instance.queue_free()
+
+func load_next_level():
 	
 	level_set_idx += 1
 	
@@ -126,8 +161,8 @@ func load_next_level():
 	add_child(current_level_instance) # TODO: Update where I add the level in the tree
 	
 func prepare_level():
-	print("setup_level()")
-	await player.move_to_spawn()
+	print("prepare_level()")
+	player.move_to_spawn()
 	set_up_secret_word()
 	
 	# Select letter item spawn points
@@ -151,7 +186,7 @@ func prepare_level():
 		letters.add_child(letter_item_instance)
 	
 func cleanup_level_end():
-	
+	print("cleanup_level_end()")
 	secret_word_label.add_theme_color_override("font_color", Color(1, 1, 1))
 	
 	# Despawn extra letter items from previous level

@@ -44,7 +44,6 @@ func exit_guessing_mode():
 	guess_input_box.text = ""
 	guess_input_box.release_focus()
 
-
 func _on_guess_input_box_text_changed(new_text: String) -> void:
 	guess_input_box.text = new_text.to_upper()
 	text_sound.play()
