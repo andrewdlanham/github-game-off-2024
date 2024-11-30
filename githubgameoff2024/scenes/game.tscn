@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt3t427dwjwim"]
+[gd_scene load_steps=8 format=3 uid="uid://dt3t427dwjwim"]
 
 [ext_resource type="PackedScene" uid="uid://np3sjtdqv647" path="res://scenes/save_manager.tscn" id="1_3mcil"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_b4ooi"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cx1d6cfnjon5n" path="res://sounds/timer_go.wav" id="3_i6xyf"]
 [ext_resource type="AudioStream" uid="uid://pea54us783t3" path="res://sounds/guess_correct.wav" id="4_b87i5"]
 [ext_resource type="PackedScene" uid="uid://b2e55bkawvrt6" path="res://scenes/menu_scene.tscn" id="5_mdstm"]
+[ext_resource type="AudioStream" uid="uid://pq22aspq0vat" path="res://sounds/wrong.wav" id="6_vt5v3"]
 
 [node name="Game" type="Node"]
 
@@ -23,6 +24,9 @@ stream = ExtResource("3_i6xyf")
 
 [node name="GuessCorrectSound" type="AudioStreamPlayer2D" parent="SoundManager"]
 stream = ExtResource("4_b87i5")
+
+[node name="GuessWrongSound" type="AudioStreamPlayer2D" parent="SoundManager"]
+stream = ExtResource("6_vt5v3")
 
 [node name="MenuScene" parent="." instance=ExtResource("5_mdstm")]
 unique_name_in_owner = true

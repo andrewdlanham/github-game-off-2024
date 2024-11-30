@@ -7,13 +7,20 @@ extends Node
 @onready var menu_scene: Node = %MenuScene
 @onready var save_manager = get_node("/root/Game/SaveManager")
 
-@onready var best_5_word_time: Label = $GrayBackground/Best5WordTime
+@onready var record_5_words: Label = $Play5Words/Panel/Record5Words
+@onready var record_15_words: Label = $Play15Words/Panel/Record15Words
+@onready var record_25_words: Label = $Play25Words/Panel/Record25Words
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var save_data = save_manager.load_game()
-	best_5_word_time.text = "PB: " + str(save_data.record_5_levels)
+	if (save_data.record_5_levels) != -1:
+		record_5_words.text = "Record: " + str(save_data.record_5_levels)
+	if (save_data.record_15_levels) != -1:
+		record_5_words.text = "Record: " + str(save_data.record_15_levels)
+	if (save_data.record_25_levels) != -1:
+		record_5_words.text = "Record: " + str(save_data.record_25_levels)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

@@ -88,10 +88,15 @@ func check_for_level_end(guess):
 		print("Correct guess!")
 		secret_word_label.text = secret_word
 		level_number_label.text = str(level_set_idx + 1) + "/" + str(save_manager.selected_num_levels)
-		
+	
+	elif guess:
+		sound_manager.guess_wrong_sound.play()	
+	
 	# Check if player has revealed the secret word
 	if secret_word_label.text == secret_word && !is_level_complete:
 		print("LEVEL COMPLETE")
+		player.animated_sprite_2d.animation = "victory"
+		player.animated_sprite_2d.play()
 		is_level_complete = true
 		sound_manager.guess_correct_sound.play()
 		secret_word_label.add_theme_color_override("font_color", Color(0, 1, 0))

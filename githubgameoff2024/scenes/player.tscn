@@ -1,10 +1,98 @@
-[gd_scene load_steps=5 format=3 uid="uid://nv0xdio8knoa"]
+[gd_scene load_steps=18 format=3 uid="uid://nv0xdio8knoa"]
 
 [ext_resource type="Texture2D" uid="uid://da3yju84ekhcm" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Player/Idle_Pose.png" id="1_2n7sx"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_x31dx"]
 [ext_resource type="AudioStream" uid="uid://c2txsu5v7iqup" path="res://sounds/jump.wav" id="3_g17xw"]
+[ext_resource type="Texture2D" uid="uid://dsb5qf8he4kka" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Player/Jump.png" id="4_2076l"]
+[ext_resource type="Texture2D" uid="uid://3dot8jxvfpt1" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Player/Run_Animation.png" id="4_p526c"]
+[ext_resource type="Texture2D" uid="uid://dvb6b8hd1yrge" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Player/Victory_Pose.png" id="6_vnl62"]
+[ext_resource type="Texture2D" uid="uid://btiuwyv2ic3vd" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Player/Slide_Wall.png" id="7_wq75h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_am0vb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq3bt"]
+atlas = ExtResource("1_2n7sx")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obesf"]
+atlas = ExtResource("4_2076l")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yliu"]
+atlas = ExtResource("4_p526c")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fhlc"]
+atlas = ExtResource("4_p526c")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qeheo"]
+atlas = ExtResource("4_p526c")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lr5b"]
+atlas = ExtResource("4_p526c")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsmev"]
+atlas = ExtResource("6_vnl62")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s484t"]
+atlas = ExtResource("7_wq75h")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tc36v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq3bt")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obesf")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yliu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fhlc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qeheo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lr5b")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsmev")
+}],
+"loop": true,
+"name": &"victory",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s484t")
+}],
+"loop": true,
+"name": &"wall_slide",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 10
@@ -15,11 +103,12 @@ position = Vector2(0, -3)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("CircleShape2D_am0vb")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -4)
-texture = ExtResource("1_2n7sx")
-
 [node name="SoundJump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_g17xw")
 volume_db = -10.0
 pitch_scale = 0.8
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_tc36v")
+animation = &"wall_slide"
