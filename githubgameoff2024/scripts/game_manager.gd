@@ -16,9 +16,9 @@ func start_game():
 	
 	# Set old record to beat
 	match save_manager.selected_num_levels:
+		3:	old_record = old_save_data.record_3_levels
 		5:	old_record = old_save_data.record_5_levels
-		15:	old_record = old_save_data.record_15_levels
-		25: old_record = old_save_data.record_25_levels
+		10: old_record = old_save_data.record_10_levels
 	
 	print("OLD RECORD: " + str(old_record))
 	level_manager.prepare_first_level()

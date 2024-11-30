@@ -14,27 +14,27 @@ func save_game(new_record, num_levels, reset_all_records):
 	if old_save_data == null:
 		print("Initializing first time records...")
 		save_dict = {
-			"record_5_levels"  : -1,
-			"record_15_levels" : -1,
-			"record_25_levels" : -1
+			"record_3_levels"  : -1,
+			"record_5_levels" : -1,
+			"record_10_levels" : -1
+		}
+	elif num_levels == 3:
+		save_dict = {
+			"record_3_levels"  : new_record,
+			"record_5_levels" : old_save_data.record_5_levels,
+			"record_10_levels" : old_save_data.record_10_levels
 		}
 	elif num_levels == 5:
 		save_dict = {
-			"record_5_levels"  : new_record,
-			"record_15_levels" : old_save_data.record_15_levels,
-			"record_25_levels" : old_save_data.record_25_levels
-		}
-	elif num_levels == 15:
-		save_dict = {
-			"record_5_levels"  : old_save_data.record_5_levels,
-			"record_15_levels" : new_record,
-			"record_25_levels" : old_save_data.record_25_levels
+			"record_3_levels"  : old_save_data.record_3_levels,
+			"record_5_levels" : new_record,
+			"record_10_levels" : old_save_data.record_10_levels
 		}
 	else: 
 		save_dict = {
-			"record_5_levels"  : old_save_data.record_5_levels,
-			"record_15_levels" : old_save_data.record_15_levels,
-			"record_25_levels" : new_record
+			"record_3_levels"  : old_save_data.record_3_levels,
+			"record_5_levels" : old_save_data.record_5_levels,
+			"record_10_levels" : new_record
 		}
 	var json_string = JSON.stringify(save_dict)
 	save_file.store_line(json_string)
@@ -56,9 +56,9 @@ func load_game():
 	print("Save file length: " + str(save_file.get_length()))
 	
 	if save_file.get_length() == 0:
-		return {"record_5_levels"  : 999,
-				"record_15_levels" : 999,
-				"record_25_levels" : 999}
+		return {"record_3_levels"  : 999,
+				"record_5_levels" : 999,
+				"record_10_levels" : 999}
 	
 	while save_file.get_position() < save_file.get_length():
 		print("Reading save data...")
