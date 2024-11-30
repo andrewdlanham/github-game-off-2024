@@ -12,6 +12,8 @@ extends Node
 @onready var game_manager: Node = %GameManager
 @onready var save_manager: Node = get_node("/root/Game/SaveManager")
 
+@onready var level_number_label: Label = %LevelNumberLabel
+
 
 var secret_word
 var level_paths = ["res://levels/level_1.tscn",
@@ -85,6 +87,7 @@ func check_for_level_end(guess):
 	if guess != null && guess.to_upper() == secret_word:
 		print("Correct guess!")
 		secret_word_label.text = secret_word
+		level_number_label.text = str(level_set_idx + 1) + "/" + str(save_manager.selected_num_levels)
 		
 	# Check if player has revealed the secret word
 	if secret_word_label.text == secret_word && !is_level_complete:
@@ -109,7 +112,9 @@ func check_for_level_end(guess):
 
 func prepare_first_level():
 	print("prepare_first_level()")
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.1).timeout
+	level_number_label.text = "0" + "/" + str(save_manager.selected_num_levels)
+	await get_tree().create_timer(0.1).timeout
 	
 	# Randomize level set
 	for n in range(save_manager.selected_num_levels):
@@ -154,7 +159,6 @@ func unload_current_level():
 func load_next_level():
 	
 	level_set_idx += 1
-	
 	print("Loading level...")
 	current_level = load(level_set[level_set_idx])
 	current_level_instance = current_level.instantiate()

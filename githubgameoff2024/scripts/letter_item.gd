@@ -17,6 +17,9 @@ func _ready() -> void:
 	
 
 func _on_body_entered(_body: Node2D) -> void:
+	
+	print(self.name + "collected!")
+	
 	if !letterCollected:
 		letterCollected = true
 		collect_sound.play()
