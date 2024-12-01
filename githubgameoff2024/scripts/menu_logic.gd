@@ -6,11 +6,14 @@ extends Node
 @onready var record_3_words: Label = $Play3Words/Panel/Record3Words
 @onready var record_5_words: Label = $Play5Words/Panel/Record5Words
 @onready var record_10_words: Label = $Play10Words/Panel/Record10Words
+@onready var sound_manager: Node = %SoundManager
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	sound_manager.menu_music.play()
 	
 	var save_data = save_manager.load_game()
 	if (save_data.record_3_levels) != -1:

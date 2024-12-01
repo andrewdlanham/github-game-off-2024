@@ -10,6 +10,7 @@ extends Node
 var old_record
 
 func _ready() -> void:
+	sound_manager.menu_music.stop()
 	start_game()
 	
 func start_game():

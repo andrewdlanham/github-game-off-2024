@@ -6,3 +6,4 @@ extends Node
 @onready var guess_wrong_sound: AudioStreamPlayer2D = $GuessWrongSound
 
 @onready var gameplay_music: AudioStreamPlayer2D = $GameplayMusic
+@onready var menu_music: AudioStreamPlayer2D = $MenuMusic

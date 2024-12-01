@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt3t427dwjwim"]
+[gd_scene load_steps=10 format=3 uid="uid://dt3t427dwjwim"]
 
 [ext_resource type="PackedScene" uid="uid://np3sjtdqv647" path="res://scenes/save_manager.tscn" id="1_3mcil"]
 [ext_resource type="Script" path="res://scripts/sound_manager.gd" id="1_b4ooi"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b2e55bkawvrt6" path="res://scenes/menu_scene.tscn" id="5_mdstm"]
 [ext_resource type="AudioStream" uid="uid://pq22aspq0vat" path="res://sounds/wrong.wav" id="6_vt5v3"]
 [ext_resource type="AudioStream" uid="uid://bdysa4016i8pc" path="res://sounds/gameplay_music.wav" id="7_6rd00"]
+[ext_resource type="AudioStream" uid="uid://cge7dfqg0salm" path="res://sounds/menu_music.wav" id="8_r6qai"]
 
 [node name="Game" type="Node"]
 
@@ -31,6 +32,10 @@ stream = ExtResource("6_vt5v3")
 
 [node name="GameplayMusic" type="AudioStreamPlayer2D" parent="SoundManager"]
 stream = ExtResource("7_6rd00")
+volume_db = -15.0
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="SoundManager"]
+stream = ExtResource("8_r6qai")
 volume_db = -15.0
 
 [node name="MenuScene" parent="." instance=ExtResource("5_mdstm")]
