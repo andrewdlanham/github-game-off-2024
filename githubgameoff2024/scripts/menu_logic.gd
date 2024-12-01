@@ -1,22 +1,24 @@
 extends Node
 
-@onready var menu_scene: Node = %MenuScene
+@onready var menu_scene: Node = get_node("/root/Game/MenuScene")
 @onready var save_manager = get_node("/root/Game/SaveManager")
 
 @onready var record_3_words: Label = $Play3Words/Panel/Record3Words
 @onready var record_5_words: Label = $Play5Words/Panel/Record5Words
 @onready var record_10_words: Label = $Play10Words/Panel/Record10Words
-@onready var sound_manager: Node = %SoundManager
+@onready var sound_manager: Node = get_node("/root/Game/SoundManager")
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	save_manager.is_on_menu = true
 	
 	var cursor_texture = preload("res://cursor.png")
 	Input.set_custom_mouse_cursor(cursor_texture)
 	
+	sound_manager.gameplay_music.stop()
 	sound_manager.menu_music.play()
 	
 	var save_data = save_manager.load_game()

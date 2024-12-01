@@ -76,8 +76,9 @@ func check_for_level_end(guess):
 		
 		if level_set_idx == level_set.size() - 1:
 			print("FINAL LEVEL")
+			await unload_current_level()
 			await game_manager.end_game(timer_manager.elapsed_time)
-			print("THIS SHOULD NOT PRINT")
+			
 			return
 		
 		await get_tree().create_timer(2).timeout # Let the player process that they beat the level
@@ -107,12 +108,7 @@ func handle_level_transition():
 	print("handle_level_transition()")
 	cleanup_level_end()
 	
-	if current_level_instance:
-		print("Unloading current level...")
-		current_level_instance.queue_free()
-		await current_level_instance.tree_exited
-		print("Level unloaded")
-		
+	await unload_current_level()
 	await load_next_level()
 	await prepare_level()
 	
@@ -129,7 +125,14 @@ func handle_level_transition():
 	await get_tree().create_timer(0.5).timeout
 	sound_manager.timer_go_sound.play()
 	countdown_timer.visible = false
-	
+
+func unload_current_level():
+	if current_level_instance:
+		print("Unloading current level...")
+		current_level_instance.queue_free()
+		await current_level_instance.tree_exited
+		print("Level unloaded")
+
 func load_next_level():
 	
 	level_set_idx += 1

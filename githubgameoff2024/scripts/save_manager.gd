@@ -1,6 +1,7 @@
 extends Node
 
 var selected_num_levels
+var is_on_menu
 
 func save_game(new_record, num_levels, reset_all_records):
 	

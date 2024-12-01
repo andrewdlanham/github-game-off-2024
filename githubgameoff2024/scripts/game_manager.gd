@@ -10,6 +10,7 @@ extends Node
 var old_record
 
 func _ready() -> void:
+	save_manager.is_on_menu = false
 	sound_manager.menu_music.stop()
 	start_game()
 	
@@ -36,4 +37,10 @@ func end_game(end_time):
 		save_manager.save_game(new_record, save_manager.selected_num_levels, false)
 	
 	await get_tree().create_timer(2).timeout
-	get_tree().quit()
+	return_to_menu()
+
+func return_to_menu():
+	var menu_scene = load("res://scenes/menu_scene.tscn")
+	var menu_instance = menu_scene.instantiate()
+	get_node("/root/Game").add_child(menu_instance)
+	get_node("/root/GameplayScene").free()
