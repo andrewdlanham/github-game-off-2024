@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=23 format=3 uid="uid://bciik78hvo4l6"]
+[gd_resource type="TileSet" load_steps=25 format=3 uid="uid://bciik78hvo4l6"]
 
 [ext_resource type="Texture2D" uid="uid://cd2gk1mxni4xr" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Peach_&_Brown.png" id="1_wwbe8"]
 [ext_resource type="Texture2D" uid="uid://cm0plk8wba4xj" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Red_&_Pink.png" id="2_x5wjr"]
 [ext_resource type="Texture2D" uid="uid://d3vawc7pqrvqp" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Volcano.png" id="3_p7jc7"]
 [ext_resource type="Texture2D" uid="uid://beynguo5ppsqy" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Castle.png" id="3_xr1jv"]
+[ext_resource type="Texture2D" uid="uid://cjlfniymr4pe8" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Ice.png" id="4_4fish"]
 [ext_resource type="Texture2D" uid="uid://qme03penkslc" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Sand.png" id="4_vedu8"]
 [ext_resource type="Texture2D" uid="uid://bvh3uq0q0avyv" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Sewer.png" id="5_exa1s"]
 [ext_resource type="Texture2D" uid="uid://cnknjqytguolj" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Yellow_&_Grey.png" id="7_ru1l4"]
@@ -56,6 +57,27 @@ texture = ExtResource("2_x5wjr")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hbsc4"]
 texture = ExtResource("3_xr1jv")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_adqrh"]
+texture = ExtResource("4_4fish")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -256,3 +278,4 @@ sources/7 = SubResource("TileSetAtlasSource_vxw6p")
 sources/8 = SubResource("TileSetAtlasSource_4gdjp")
 sources/9 = SubResource("TileSetAtlasSource_xhy3a")
 sources/10 = SubResource("TileSetAtlasSource_hbsc4")
+sources/11 = SubResource("TileSetAtlasSource_adqrh")

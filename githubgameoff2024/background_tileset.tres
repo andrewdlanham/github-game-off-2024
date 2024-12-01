@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://xmcc1h1344bg"]
+[gd_resource type="TileSet" load_steps=23 format=3 uid="uid://xmcc1h1344bg"]
 
 [ext_resource type="Texture2D" uid="uid://cnknjqytguolj" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Yellow_&_Grey.png" id="1_0p5ve"]
 [ext_resource type="Texture2D" uid="uid://beynguo5ppsqy" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Castle.png" id="2_xxgt3"]
+[ext_resource type="Texture2D" uid="uid://rtje7r0dkvob" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Brown_&_Green.png" id="3_pum7i"]
 [ext_resource type="Texture2D" uid="uid://lx4ycmcw6xce" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Clouds.png" id="3_t6yvb"]
 [ext_resource type="Texture2D" uid="uid://2qcls1oiidyc" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Forest.png" id="4_eyehp"]
 [ext_resource type="Texture2D" uid="uid://csvmh7xb8wek6" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Grass_Basic.png" id="5_nk7rq"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://qme03penkslc" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Sand.png" id="7_64od7"]
 [ext_resource type="Texture2D" uid="uid://bvh3uq0q0avyv" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Sewer.png" id="8_i75xf"]
 [ext_resource type="Texture2D" uid="uid://d3vawc7pqrvqp" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Volcano.png" id="9_4rmch"]
+[ext_resource type="Texture2D" uid="uid://cc7bvoy8o6bjk" path="res://assets/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Premium Platformer Asset Pack/Tilesets/Pattern_Blue_&_Grey.png" id="10_rqn4w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r7pmw"]
 texture = ExtResource("1_0p5ve")
@@ -24,6 +26,18 @@ texture = ExtResource("1_0p5ve")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ton8h"]
 texture = ExtResource("2_xxgt3")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3h8do"]
+texture = ExtResource("3_pum7i")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -118,6 +132,18 @@ texture = ExtResource("9_4rmch")
 1:2/0 = 0
 2:2/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5k84x"]
+texture = ExtResource("10_rqn4w")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
 [resource]
 sources/0 = SubResource("TileSetAtlasSource_r7pmw")
 sources/1 = SubResource("TileSetAtlasSource_ton8h")
@@ -128,3 +154,5 @@ sources/5 = SubResource("TileSetAtlasSource_mtbwk")
 sources/6 = SubResource("TileSetAtlasSource_0bylv")
 sources/7 = SubResource("TileSetAtlasSource_q8hnw")
 sources/8 = SubResource("TileSetAtlasSource_gxb2i")
+sources/9 = SubResource("TileSetAtlasSource_5k84x")
+sources/10 = SubResource("TileSetAtlasSource_3h8do")

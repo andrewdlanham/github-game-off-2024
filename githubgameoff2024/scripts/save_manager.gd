@@ -56,9 +56,9 @@ func load_game():
 	print("Save file length: " + str(save_file.get_length()))
 	
 	if save_file.get_length() == 0:
-		return {"record_3_levels"  : 999,
-				"record_5_levels" : 999,
-				"record_10_levels" : 999}
+		return {"record_3_levels"  : -1,
+				"record_5_levels" : -1,
+				"record_10_levels" : -1}
 	
 	while save_file.get_position() < save_file.get_length():
 		print("Reading save data...")

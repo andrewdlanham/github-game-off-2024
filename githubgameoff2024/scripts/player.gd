@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	# Handle gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		if is_on_wall():
+		if is_on_wall() && direction:
 			velocity.y = velocity.y * 0.7
 		is_jumping = true
 	else: is_jumping = false
@@ -58,7 +58,6 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		sound_jump.play()
 	
-		
 	# Handle animation
 	if is_on_wall() && !is_on_floor():
 		animated_sprite_2d.animation = "wall_slide"

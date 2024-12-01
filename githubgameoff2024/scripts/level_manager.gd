@@ -19,6 +19,14 @@ var secret_word
 var level_paths = ["res://levels/level_1.tscn",
 					"res://levels/level_2.tscn",
 					"res://levels/sand_level_1.tscn",
+					"res://levels/sand_level_2.tscn",
+					"res://levels/ice_level_1.tscn",
+					"res://levels/ice_level_2.tscn",
+					"res://levels/grass_level_1.tscn",
+					"res://levels/sewer_level_1.tscn",
+					"res://levels/sewer_level_2.tscn",
+					"res://levels/volcano_level_1.tscn",
+					"res://levels/volcano_level_2.tscn",
 					]
 
 var level_set = []
@@ -33,16 +41,16 @@ var available_spawn_points
 func freeze_level():
 	print("freeze_level()")
 	timer_manager.pause_timer()
-	player.disable_movement()
-	player.disable_collision()
+	await player.disable_movement()
+	await player.disable_collision()
 	guess_manager.set_process(false)
 	guess_manager.exit_guessing_mode()
 
 func unfreeze_level():
 	print("unfreeze_level()")
 	timer_manager.unpause_timer()
-	player.enable_movement()
-	player.enable_collision()
+	await player.enable_movement()
+	await player.enable_collision()
 	guess_manager.set_process(true)
 
 func check_for_level_end(guess):
@@ -109,17 +117,16 @@ func handle_level_transition():
 	await prepare_level()
 	
 	# Countdown timer
-	# TODO: Update timer values once done testing
 	countdown_timer.visible = true
 	countdown_timer.text = '3'
 	sound_manager.timer_tick_sound.play()
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.5).timeout
 	countdown_timer.text = '2'
 	sound_manager.timer_tick_sound.play()
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.5).timeout
 	countdown_timer.text = '1'
 	sound_manager.timer_tick_sound.play()
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.5).timeout
 	sound_manager.timer_go_sound.play()
 	countdown_timer.visible = false
 	
