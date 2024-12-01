@@ -94,11 +94,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 10
 script = ExtResource("1_x31dx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("CircleShape2D_am0vb")

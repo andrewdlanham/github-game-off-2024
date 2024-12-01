@@ -17,45 +17,8 @@ extends Node
 
 var secret_word
 var level_paths = ["res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
 					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_1.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn",
-					"res://levels/level_2.tscn"
+					"res://levels/sand_level_1.tscn",
 					]
 
 var level_set = []
@@ -135,10 +98,15 @@ func prepare_first_level():
 func handle_level_transition():
 	print("handle_level_transition()")
 	cleanup_level_end()
-	unload_current_level()
-	load_next_level()
-	prepare_level()
-	print("line after prepare_level() --------------------")
+	
+	if current_level_instance:
+		print("Unloading current level...")
+		current_level_instance.queue_free()
+		await current_level_instance.tree_exited
+		print("Level unloaded")
+		
+	await load_next_level()
+	await prepare_level()
 	
 	# Countdown timer
 	# TODO: Update timer values once done testing
@@ -155,12 +123,6 @@ func handle_level_transition():
 	sound_manager.timer_go_sound.play()
 	countdown_timer.visible = false
 	
-func unload_current_level():
-	print("unload_current_level()")
-	if current_level_instance:
-		print("Unloading current level...")
-		current_level_instance.queue_free()
-
 func load_next_level():
 	
 	level_set_idx += 1
@@ -171,12 +133,13 @@ func load_next_level():
 	
 func prepare_level():
 	print("prepare_level()")
-	player.move_to_spawn()
+	await player.move_to_spawn()
 	set_up_secret_word()
 	
 	# Select letter item spawn points
 	available_spawn_points = []
 	available_spawn_points = get_tree().get_nodes_in_group("LetterSpawnPoint")
+	
 	print("# of spawn points: " + str(available_spawn_points.size()))
 	spawn_points = []
 	for n in range(secret_word.length()):

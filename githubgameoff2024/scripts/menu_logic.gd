@@ -1,9 +1,5 @@
 extends Node
 
-@onready var play_5_words: Button = $Play5Words
-@onready var play_15_words: Button = $Play15Words
-
-
 @onready var menu_scene: Node = %MenuScene
 @onready var save_manager = get_node("/root/Game/SaveManager")
 

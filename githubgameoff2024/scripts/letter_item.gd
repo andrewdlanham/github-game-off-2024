@@ -18,9 +18,8 @@ func _ready() -> void:
 
 func _on_body_entered(_body: Node2D) -> void:
 	
-	print(self.name + "collected!")
-	
-	if !letterCollected:
+	if !letterCollected && _body.is_in_group("Player"):
+		print(self.name + "collected!")
 		letterCollected = true
 		collect_sound.play()
 		secret_word_label.text[letterPosition] = hiddenLetter
