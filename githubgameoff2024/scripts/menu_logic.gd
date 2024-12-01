@@ -13,6 +13,10 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	
+	var cursor_texture = preload("res://cursor.png")
+	Input.set_custom_mouse_cursor(cursor_texture)
+	
 	sound_manager.menu_music.play()
 	
 	var save_data = save_manager.load_game()

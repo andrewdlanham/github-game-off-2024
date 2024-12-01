@@ -108,6 +108,7 @@ vertical_alignment = 2
 
 [node name="GuessInputBox" type="LineEdit" parent="."]
 unique_name_in_owner = true
+z_index = 10
 offset_left = -80.0
 offset_top = -168.0
 offset_right = 78.0
