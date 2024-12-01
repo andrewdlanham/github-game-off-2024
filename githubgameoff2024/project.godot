@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/resizable=false
+window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
 [input]
@@ -55,3 +57,4 @@ anti_aliasing/screen_space_roughness_limiter/enabled=false
 environment/glow/upscale_mode=0
 environment/screen_space_reflection/roughness_quality=0
 environment/subsurface_scattering/subsurface_scattering_quality=0
+lights_and_shadows/tighter_shadow_caster_culling=false
