@@ -17,6 +17,8 @@ func _ready() -> void:
 	
 func start_game():
 	
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	sound_manager.gameplay_music.play()
 	old_save_data = save_manager.load_game()
 	

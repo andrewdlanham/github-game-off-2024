@@ -39,7 +39,7 @@ var available_spawn_points
 
 
 func freeze_level():
-	print("freeze_level()")
+	#print("freeze_level()")
 	timer_manager.pause_timer()
 	await player.disable_movement()
 	await player.disable_collision()
@@ -47,16 +47,16 @@ func freeze_level():
 	guess_manager.exit_guessing_mode()
 
 func unfreeze_level():
-	print("unfreeze_level()")
+	#print("unfreeze_level()")
 	timer_manager.unpause_timer()
 	await player.enable_movement()
 	await player.enable_collision()
 	guess_manager.set_process(true)
 
 func check_for_level_end(guess):
-	print("check_for_level_end()")
+	#print("check_for_level_end()")
 	if guess != null && guess.to_upper() == secret_word:
-		print("Correct guess!")
+		#print("Correct guess!")
 		secret_word_label.text = secret_word
 	
 	elif guess:
@@ -64,7 +64,7 @@ func check_for_level_end(guess):
 	
 	# Check if player has revealed the secret word
 	if secret_word_label.text == secret_word && !is_level_complete:
-		print("LEVEL COMPLETE")
+		#print("LEVEL COMPLETE")
 		level_number_label.text = str(level_set_idx + 1) + "/" + str(save_manager.selected_num_levels)
 		player.animated_sprite_2d.animation = "victory"
 		player.animated_sprite_2d.play()
@@ -75,7 +75,7 @@ func check_for_level_end(guess):
 		freeze_level()
 		
 		if level_set_idx == level_set.size() - 1:
-			print("FINAL LEVEL")
+			#print("FINAL LEVEL")
 			await game_manager.end_game(timer_manager.elapsed_time)
 			
 			return
@@ -87,7 +87,7 @@ func check_for_level_end(guess):
 
 
 func prepare_first_level():
-	print("prepare_first_level()")
+	#print("prepare_first_level()")
 	await get_tree().create_timer(0.1).timeout
 	level_number_label.text = "0" + "/" + str(save_manager.selected_num_levels)
 	await get_tree().create_timer(0.1).timeout
@@ -104,7 +104,7 @@ func prepare_first_level():
 	unfreeze_level()
 
 func handle_level_transition():
-	print("handle_level_transition()")
+	#print("handle_level_transition()")
 	cleanup_level_end()
 	
 	await unload_current_level()
@@ -127,21 +127,21 @@ func handle_level_transition():
 
 func unload_current_level():
 	if current_level_instance:
-		print("Unloading current level...")
+		#print("Unloading current level...")
 		current_level_instance.queue_free()
 		await current_level_instance.tree_exited
-		print("Level unloaded")
+		#print("Level unloaded")
 
 func load_next_level():
 	
 	level_set_idx += 1
-	print("Loading level...")
+	#print("Loading level...")
 	current_level = load(level_set[level_set_idx])
 	current_level_instance = current_level.instantiate()
 	add_child(current_level_instance) # TODO: Update where I add the level in the tree
 	
 func prepare_level():
-	print("prepare_level()")
+	#print("prepare_level()")
 	await player.move_to_spawn()
 	set_up_secret_word()
 	
@@ -149,13 +149,13 @@ func prepare_level():
 	available_spawn_points = []
 	available_spawn_points = get_tree().get_nodes_in_group("LetterSpawnPoint")
 	
-	print("# of spawn points: " + str(available_spawn_points.size()))
+	#print("# of spawn points: " + str(available_spawn_points.size()))
 	spawn_points = []
 	for n in range(secret_word.length()):
 		var random_spawn_point = available_spawn_points[randi_range(0, available_spawn_points.size() - 1)]
 		spawn_points.append(random_spawn_point)
 		available_spawn_points.erase(random_spawn_point)
-	print("# of spawn points used: " + str(spawn_points.size()))
+	#print("# of spawn points used: " + str(spawn_points.size()))
 	
 	# Spawn letter items
 	for n in range(secret_word.length()):
@@ -167,7 +167,7 @@ func prepare_level():
 		letters.add_child(letter_item_instance)
 	
 func cleanup_level_end():
-	print("cleanup_level_end()")
+	#print("cleanup_level_end()")
 	secret_word_label.add_theme_color_override("font_color", Color(1, 1, 1))
 	
 	# Despawn extra letter items from previous level
