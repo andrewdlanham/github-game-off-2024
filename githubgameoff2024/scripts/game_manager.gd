@@ -5,6 +5,8 @@ extends Node
 @onready var save_manager: Node = get_node("/root/Game/SaveManager")
 @onready var level_manager: Node = %LevelManager
 @onready var sound_manager: Node = get_node("/root/Game/SoundManager")
+@onready var new_record_label: Label = %NewRecordLabel
+
 
 
 var old_record
@@ -39,9 +41,17 @@ func end_game(end_time):
 	if old_record == -1 || new_record < old_record:
 		print('SAVING NEW RECORD!')
 		await save_manager.save_game(new_record, save_manager.selected_num_levels, false, old_save_data)
+		await get_tree().create_timer(1).timeout
+		new_record_label.visible = true
+		sound_manager.guess_correct_sound.play()
+		await get_tree().create_timer(1).timeout
+		sound_manager.guess_correct_sound.play()
+		await get_tree().create_timer(1).timeout
+		sound_manager.guess_correct_sound.play()
+		
+		
 	
-	await get_tree().create_timer(2).timeout
-	# TODO: Implement new record notification
+	await get_tree().create_timer(3).timeout
 	return_to_menu()
 
 func return_to_menu():

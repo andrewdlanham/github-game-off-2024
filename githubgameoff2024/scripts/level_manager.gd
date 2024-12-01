@@ -138,7 +138,7 @@ func load_next_level():
 	#print("Loading level...")
 	current_level = load(level_set[level_set_idx])
 	current_level_instance = current_level.instantiate()
-	add_child(current_level_instance) # TODO: Update where I add the level in the tree
+	add_child(current_level_instance)
 	
 func prepare_level():
 	#print("prepare_level()")
@@ -177,7 +177,7 @@ func cleanup_level_end():
 func set_up_secret_word():
 	# Get next secret word
 	secret_word = random_word_generator.get_random_word()
-	print("secret word: " + secret_word)
+	#print("secret word: " + secret_word)
 	
 	# Set up word label
 	secret_word_label.text = ""

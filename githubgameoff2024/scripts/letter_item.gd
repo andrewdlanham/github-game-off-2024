@@ -8,6 +8,7 @@ extends Node2D
 
 @onready var secret_word_label
 
+
 var letterPosition # Letter's position in secret word
 var hiddenLetter = ''
 var letterCollected = false
@@ -21,7 +22,7 @@ func _ready() -> void:
 func _on_body_entered(_body: Node2D) -> void:
 	
 	if !letterCollected && _body.is_in_group("Player"):
-		print(self.name + "collected!")
+		#print(self.name + "collected!")
 		letterCollected = true
 		collect_sound.play()
 		self.visible = false

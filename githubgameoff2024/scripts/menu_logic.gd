@@ -5,11 +5,12 @@ extends Node
 
 @onready var buttons: Control = $Buttons
 
-@onready var record_3_words: Label = $Buttons/Play3Words/Panel/Record3Words
-@onready var record_5_words: Label = $Buttons/Play5Words/Panel/Record5Words
-@onready var record_10_words: Label = $Buttons/Play10Words/Panel/Record10Words
+@onready var record_3_words: Label = $Buttons/Play3Words/Record3Words
+@onready var record_5_words: Label = $Buttons/Play5Words/Record5Words
+@onready var record_10_words: Label = $Buttons/Play10Words/Record10Words
 @onready var how_to_play_box: Control = $HowToPlayBox
 
+@onready var reset_records_button: Button = $Buttons/ResetRecordsButton
 
 
 @onready var sound_manager: Node = get_node("/root/Game/SoundManager")
@@ -27,6 +28,10 @@ func _ready() -> void:
 	sound_manager.gameplay_music.stop()
 	sound_manager.menu_music.play()
 	
+	update_display_records()
+	
+
+func update_display_records():
 	var save_data = save_manager.load_game()
 
 	# Handle first time setup for records
@@ -35,18 +40,24 @@ func _ready() -> void:
 	if save_data:
 		if (save_data.record_3_levels) != -1:
 			record_3_words.text = "Record: " + get_formatted_time(float(save_data.record_3_levels))
+		else: record_3_words.text = "Record: N/A"
 		if (save_data.record_5_levels) != -1:
 			record_5_words.text = "Record: " + get_formatted_time(float(save_data.record_5_levels))
+		else: record_5_words.text = "Record: N/A"
 		if (save_data.record_10_levels) != -1:
 			record_10_words.text = "Record: " + get_formatted_time(float(save_data.record_10_levels))
-
+		else: record_10_words.text = "Record: N/A"
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
 
 func _on_reset_records_button_pressed() -> void:
+	reset_records_button.release_focus()
+	sound_manager.guess_wrong_sound.play()
 	print("Resetting records...")
 	save_manager.save_game(-1, -1, true, save_manager.load_game())
+	update_display_records()
 
 func trigger_start_game():
 	print("Loading game...")

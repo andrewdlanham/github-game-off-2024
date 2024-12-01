@@ -69,7 +69,6 @@ func _physics_process(delta: float) -> void:
 	
 	animated_sprite_2d.play()
 
-	# TODO: Check what this function does
 	move_and_slide()
 
 func disable_movement():

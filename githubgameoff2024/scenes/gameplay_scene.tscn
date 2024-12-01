@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://iotor00ogoqu"]
+[gd_scene load_steps=10 format=3 uid="uid://iotor00ogoqu"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_0an02"]
 [ext_resource type="Script" path="res://scripts/random_word_generator.gd" id="2_4m16p"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://nv0xdio8knoa" path="res://scenes/player.tscn" id="5_nfoh7"]
 [ext_resource type="FontFile" uid="uid://cr5xqdjcwmv8o" path="res://PixelOperator8.ttf" id="6_h8f1c"]
 [ext_resource type="AudioStream" uid="uid://ch8wfiynh0qnb" path="res://sounds/text.wav" id="6_yr12i"]
+[ext_resource type="Script" path="res://scripts/bobbing.gd" id="9_bdm8g"]
 
 [node name="GameplayScene" type="Node"]
 
@@ -46,9 +47,9 @@ script = ExtResource("4_k1sr0")
 unique_name_in_owner = true
 z_index = 10
 offset_left = -24.0
-offset_top = -176.0
+offset_top = -168.0
 offset_right = 28.0
-offset_bottom = -125.0
+offset_bottom = -117.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -65,9 +66,11 @@ offset_top = -296.0
 offset_right = 280.0
 offset_bottom = -264.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_h8f1c")
 theme_override_font_sizes/font_size = 16
-text = "0:00.0"
+text = "0.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -85,9 +88,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -646.0
+offset_left = -640.0
 offset_top = -627.0
-offset_right = -506.0
+offset_right = -512.0
 offset_bottom = -582.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -95,24 +98,27 @@ grow_vertical = 2
 [node name="SecretWordLabel" type="Label" parent="Panel"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_top = 10.0
-offset_right = 139.0
-offset_bottom = 34.0
+offset_top = 7.0
+offset_right = 128.0
+offset_bottom = 31.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_h8f1c")
 theme_override_font_sizes/font_size = 16
 text = "------"
 horizontal_alignment = 1
 vertical_alignment = 2
+script = ExtResource("9_bdm8g")
 
 [node name="GuessInputBox" type="LineEdit" parent="."]
 unique_name_in_owner = true
 z_index = 10
 offset_left = -80.0
-offset_top = -168.0
+offset_top = -160.0
 offset_right = 78.0
-offset_bottom = -137.0
+offset_bottom = -129.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_h8f1c")
 theme_override_font_sizes/font_size = 16
 alignment = 1
@@ -128,6 +134,8 @@ offset_top = 3.0
 offset_right = 7.0
 offset_bottom = 11.0
 scale = Vector2(1.5, 1.5)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_h8f1c")
 theme_override_font_sizes/font_size = 8
 text = "0/3"
@@ -141,5 +149,22 @@ offset_left = 3.0
 offset_top = -2.0
 offset_right = 36.0
 offset_bottom = 9.0
+
+[node name="NewRecordLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 50
+offset_left = -128.0
+offset_top = -168.0
+offset_right = 128.0
+offset_bottom = -120.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("6_h8f1c")
+theme_override_font_sizes/font_size = 24
+text = "NEW RECORD!"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_bdm8g")
 
 [connection signal="text_changed" from="GuessInputBox" to="GuessManager" method="_on_guess_input_box_text_changed"]
