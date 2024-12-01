@@ -76,7 +76,6 @@ func check_for_level_end(guess):
 		
 		if level_set_idx == level_set.size() - 1:
 			print("FINAL LEVEL")
-			await unload_current_level()
 			await game_manager.end_game(timer_manager.elapsed_time)
 			
 			return

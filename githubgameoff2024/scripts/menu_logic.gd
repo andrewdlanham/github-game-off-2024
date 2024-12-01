@@ -8,10 +8,10 @@ extends Node
 @onready var record_10_words: Label = $Play10Words/Panel/Record10Words
 @onready var sound_manager: Node = get_node("/root/Game/SoundManager")
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	
 	
 	save_manager.is_on_menu = true
 	
@@ -22,12 +22,17 @@ func _ready() -> void:
 	sound_manager.menu_music.play()
 	
 	var save_data = save_manager.load_game()
-	if (save_data.record_3_levels) != -1:
-		record_3_words.text = "Record: " + str(save_data.record_3_levels)
-	if (save_data.record_5_levels) != -1:
-		record_5_words.text = "Record: " + str(save_data.record_5_levels)
-	if (save_data.record_10_levels) != -1:
-		record_10_words.text = "Record: " + str(save_data.record_10_levels)
+
+	# Handle first time setup for records
+	await save_manager.save_game(0,0,false, save_data)
+		
+	if save_data:
+		if (save_data.record_3_levels) != -1:
+			record_3_words.text = "Record: " + str(save_data.record_3_levels)
+		if (save_data.record_5_levels) != -1:
+			record_5_words.text = "Record: " + str(save_data.record_5_levels)
+		if (save_data.record_10_levels) != -1:
+			record_10_words.text = "Record: " + str(save_data.record_10_levels)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -35,13 +40,14 @@ func _process(_delta: float) -> void:
 
 func _on_reset_records_button_pressed() -> void:
 	print("Resetting records...")
-	save_manager.save_game(-1, -1, true)
+	save_manager.save_game(-1, -1, true, save_manager.load_game())
 
 func trigger_start_game():
 	print("Loading game...")
 	var gameplay_scene = load("res://scenes/gameplay_scene.tscn")
 	get_tree().root.add_child(gameplay_scene.instantiate())
-	menu_scene.queue_free()
+	await get_tree().create_timer(0.1).timeout
+	menu_scene.free()
 
 func _on_play_3_words_pressed() -> void:
 	print("3 words selected")

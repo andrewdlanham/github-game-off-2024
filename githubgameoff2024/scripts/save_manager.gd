@@ -3,16 +3,47 @@ extends Node
 var selected_num_levels
 var is_on_menu
 
-func save_game(new_record, num_levels, reset_all_records):
+func save_game(new_record, num_levels, reset_all_records, old_save_data):
 	
-	print("save_game()")
+	print("save_game(" + str(new_record) + ", " + str(num_levels) + ")")
+	var first_time = false
 	
-	var old_save_data = load_game()
-	if reset_all_records == true: old_save_data = null
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
-	
+	if not FileAccess.file_exists("user://savegame.save"):
+		print("No save file! Initializing default records...")
+		first_time = true
+		
 	var save_dict
-	if old_save_data == null:
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	var json_string
+	
+	if num_levels == 0 && !first_time:
+		save_dict = {
+			"record_3_levels"  : old_save_data.record_3_levels,
+			"record_5_levels" : old_save_data.record_5_levels,
+			"record_10_levels" : old_save_data.record_10_levels
+		}
+		json_string = JSON.stringify(save_dict)
+		save_file.store_line(json_string)
+	
+		print("Default records saved: " + json_string)
+		
+		return
+	
+	
+	if first_time || old_save_data == null: 
+		save_dict = {
+			"record_3_levels"  : -1,
+			"record_5_levels" : -1,
+			"record_10_levels" : -1
+		}
+		json_string = JSON.stringify(save_dict)
+		save_file.store_line(json_string)
+	
+		print("Default records saved: " + json_string)
+		
+		return
+	
+	if reset_all_records == true:
 		print("Initializing first time records...")
 		save_dict = {
 			"record_3_levels"  : -1,
@@ -31,15 +62,22 @@ func save_game(new_record, num_levels, reset_all_records):
 			"record_5_levels" : new_record,
 			"record_10_levels" : old_save_data.record_10_levels
 		}
-	else: 
+	elif num_levels == 10: 
 		save_dict = {
 			"record_3_levels"  : old_save_data.record_3_levels,
 			"record_5_levels" : old_save_data.record_5_levels,
 			"record_10_levels" : new_record
 		}
-	var json_string = JSON.stringify(save_dict)
+	else:
+		print("Initializing first time records...")
+		save_dict = {
+			"record_3_levels"  : -1,
+			"record_5_levels" : -1,
+			"record_10_levels" : -1
+		}
+		
+	json_string = JSON.stringify(save_dict)
 	save_file.store_line(json_string)
-	
 	print("Data saved: " + json_string)
 
 func load_game():
@@ -57,6 +95,7 @@ func load_game():
 	print("Save file length: " + str(save_file.get_length()))
 	
 	if save_file.get_length() == 0:
+		
 		return {"record_3_levels"  : -1,
 				"record_5_levels" : -1,
 				"record_10_levels" : -1}
@@ -81,5 +120,13 @@ func load_game():
 		print("Player's save data:")
 		print(saved_data)
 		
-	print("Returning save data...")
+		
 	return saved_data
+
+
+#func delete_save_file():
+	#var file_path = "user://savegame.save"
+	#if FileAccess.file_exists(file_path):
+		#var error = FileAccess.remove(file_path)
+		#if error == OK:
+			#print("File deleted successfullly!")

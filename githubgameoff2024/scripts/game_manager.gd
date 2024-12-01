@@ -8,6 +8,7 @@ extends Node
 
 
 var old_record
+var old_save_data
 
 func _ready() -> void:
 	save_manager.is_on_menu = false
@@ -17,9 +18,10 @@ func _ready() -> void:
 func start_game():
 	
 	sound_manager.gameplay_music.play()
-	var old_save_data = save_manager.load_game()
+	old_save_data = save_manager.load_game()
 	
 	# Set old record to beat
+	old_record = -1
 	match save_manager.selected_num_levels:
 		3:	old_record = old_save_data.record_3_levels
 		5:	old_record = old_save_data.record_5_levels
@@ -34,9 +36,10 @@ func end_game(end_time):
 	var new_record = round(end_time * 100) / 100
 	if old_record == -1 || new_record < old_record:
 		print('SAVING NEW RECORD!')
-		save_manager.save_game(new_record, save_manager.selected_num_levels, false)
+		await save_manager.save_game(new_record, save_manager.selected_num_levels, false, old_save_data)
 	
 	await get_tree().create_timer(2).timeout
+	# TODO: Implement new record notification
 	return_to_menu()
 
 func return_to_menu():

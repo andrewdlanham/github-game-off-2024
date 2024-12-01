@@ -10,7 +10,6 @@ const WALL_JUMP_FORCE = Vector2(-400, -250)
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sound_jump: AudioStreamPlayer2D = $SoundJump
-@onready var level_manager: Node = %LevelManager
 
 var is_enabled: bool
 var is_jumping: bool
