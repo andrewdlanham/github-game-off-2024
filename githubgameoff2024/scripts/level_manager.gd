@@ -87,7 +87,6 @@ func check_for_level_end(guess):
 	if guess != null && guess.to_upper() == secret_word:
 		print("Correct guess!")
 		secret_word_label.text = secret_word
-		level_number_label.text = str(level_set_idx + 1) + "/" + str(save_manager.selected_num_levels)
 	
 	elif guess:
 		sound_manager.guess_wrong_sound.play()	
@@ -95,6 +94,7 @@ func check_for_level_end(guess):
 	# Check if player has revealed the secret word
 	if secret_word_label.text == secret_word && !is_level_complete:
 		print("LEVEL COMPLETE")
+		level_number_label.text = str(level_set_idx + 1) + "/" + str(save_manager.selected_num_levels)
 		player.animated_sprite_2d.animation = "victory"
 		player.animated_sprite_2d.play()
 		is_level_complete = true

@@ -4,6 +4,8 @@ extends Node
 
 @onready var save_manager: Node = get_node("/root/Game/SaveManager")
 @onready var level_manager: Node = %LevelManager
+@onready var sound_manager: Node = get_node("/root/Game/SoundManager")
+
 
 var old_record
 
@@ -12,6 +14,7 @@ func _ready() -> void:
 	
 func start_game():
 	
+	sound_manager.gameplay_music.play()
 	var old_save_data = save_manager.load_game()
 	
 	# Set old record to beat

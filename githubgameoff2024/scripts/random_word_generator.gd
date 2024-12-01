@@ -1,6 +1,6 @@
 extends Node2D
 
-const number_lines = 99
+const number_lines = 360
 
 var file
 
